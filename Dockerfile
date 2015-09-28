@@ -54,6 +54,7 @@ RUN mkdir -p /etc/mysql/conf.d \
 VOLUME /var/lib/mysql
 
 COPY docker-entrypoint.sh /entrypoint.sh
+COPY create.sql /create.sql
 ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 3306
