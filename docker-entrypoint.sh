@@ -72,6 +72,11 @@ if [ "$1" = 'mysqld' ]; then
 			fi
 
 			echo 'FLUSH PRIVILEGES ;' | "${mysql[@]}"
+
+                         if [ "$MYSQL_DATABASE" -a "$MYSQL_TABLE_SCRIPT" ]; then
+                                "${mysql[@]}" < /create.sql
+                         fi
+
 		fi
 
 		echo
@@ -96,5 +101,4 @@ if [ "$1" = 'mysqld' ]; then
 
 	chown -R mysql:mysql "$DATADIR"
 fi
-
 exec "$@"
