@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS DH_CHARGE;
+
 DROP TABLE IF EXISTS DH_CURRENCY;
 
 DROP TABLE IF EXISTS DH_DATAITEM;
@@ -12,13 +14,13 @@ DROP TABLE IF EXISTS DH_FIELD;
 
 DROP TABLE IF EXISTS DH_GROUP;
 
+DROP TABLE IF EXISTS DH_LOG;
+
 DROP TABLE IF EXISTS DH_PERMITGROUP;
 
 DROP TABLE IF EXISTS DH_PERMITTYPE;
 
 DROP TABLE IF EXISTS DH_PERMITUSER;
-
-DROP TABLE IF EXISTS DH_PRICEUNIT;
 
 DROP TABLE IF EXISTS DH_REPOSITORY;
 
@@ -35,12 +37,28 @@ DROP TABLE IF EXISTS DH_USERLIST;
 DROP TABLE IF EXISTS DH_USERSTATUS;
 
 /*==============================================================*/
+/* Table: DH_CHARGE                                             */
+/*==============================================================*/
+CREATE TABLE DH_CHARGE
+(
+   ACCOUNT_ID           VARCHAR(64) NOT NULL COMMENT 'ÕËºÅ',
+   CURRENCY_TYPE        INT NOT NULL,
+   FEE_TYPE             CHAR(10) COMMENT '³äÖµ·ÑÓÃÀàÐÍ
+            1-Ñº½ð
+            2-Ô¤´æ¿î
+            3-ÐÅÓÃ¶È',
+   PAYMENT              DECIMAL(10,3),
+   OPTIME               DATETIME NOT NULL COMMENT 'ÕÊ»§±ä¶¯ÈÕÆÚ',
+   USER_ID              INT
+);
+
+/*==============================================================*/
 /* Table: DH_CURRENCY                                           */
 /*==============================================================*/
 CREATE TABLE DH_CURRENCY
 (
    CURRENCY_TYPE        INT NOT NULL,
-   CURRENCY_NAME        VARCHAR(64) COMMENT 'å¸ç§åç§°ï¼Œå¦‚Qå¸ã€äººæ°‘å¸ã€æ¬§å…ƒ',
+   CURRENCY_NAME        VARCHAR(64) COMMENT '±ÒÖÖÃû³Æ£¬ÈçQ±Ò¡¢ÈËÃñ±Ò¡¢Å·Ôª',
    COMMENT              VARCHAR(1024)
 );
 
@@ -52,25 +70,25 @@ CREATE TABLE DH_DATAITEM
    REPOSITORY_ID        INT,
    USER_ID              INT,
    DATAITEM_ID          INT NOT NULL,
-   DATAITEM_NAME        VARCHAR(1024) COMMENT 'è¡¨ä¹‰çš„ä¸­æ–‡åå­—çš„
-            åœ¨æœç´¢ç»“æžœé¡µé¢ä¸Šå±•ç¤ºç”¨',
-   ICO_NAME             VARCHAR(64) COMMENT 'å›¾æ ‡æ–‡ä»¶å',
-   TAG                  VARCHAR(1024) COMMENT 'ç”¨é€—å·åˆ†éš”å¤šä¸ªtagæ ‡è®°',
-   PERMIT_TYPE          INT COMMENT '1-ç§æœ‰ï¼Œä»…é™æœ‰è¡€ç¼˜å…³ç³»çš„å¸å·ä½¿ç”¨
-            2-å‘æ‰€æœ‰ç”¨æˆ·å¼€æ”¾
-            3-ç”¨æˆ·ç™½åå•å¯ç”¨
-            4-ç”¨æˆ·é»‘åå•ä¸å¯ç”¨
-            5-ç”¨æˆ·ç»„ç™½åå•å¯ç”¨
-            6-ç”¨æˆ·ç»„é»‘åå•ä¸å¯ç”¨',
-   SUPPLY_STYLE         INT COMMENT 'å®žæ—¶å•æ¡ï¼›æ‰¹é‡ï¼› æµ',
-   PRICEUNIT_TYPE       INT COMMENT 'å®šä»·å•ä½',
-   PRICE                DECIMAL(12,3) COMMENT 'å®šä»·',
-   OPTIME               DATE COMMENT 'åˆå§‹åŒ–æˆ–ä¿®æ”¹æ—¶é—´',
-   REFRESH_TYPE         INT COMMENT 'æ•°æ®çš„åˆ·æ–°å‘¨æœŸï¼Œç¼ºçœä¸ºæ—¥',
-   REFRESH_DATE         DATE COMMENT 'æœ€æ–°æ•°æ®æ—¥æœŸï¼Œä¸Šä¼ æ—¶æ›´æ–°',
-   FILE_TYPE            VARCHAR(64) COMMENT 'æ–‡ä»¶æ ¼å¼',
-   SAMPLE_FILENAME      VARCHAR(1024) COMMENT 'æ ·ä¾‹æ•°æ®',
-   PASSWORD             VARCHAR(64) COMMENT 'æŸ¥çœ‹å®è—çš„å¯†ç ï¼Œå­˜æ˜Žç ï¼ŒadminæŸ¥è¯¢æä¾›ç»™è¯·æ±‚çš„ç”¨æˆ·ï¼Œå¯ä¸´æ—¶æŸ¥çœ‹',
+   DATAITEM_NAME        VARCHAR(1024) COMMENT '±íÒåµÄÖÐÎÄÃû×ÖµÄ
+            ÔÚËÑË÷½á¹ûÒ³ÃæÉÏÕ¹Ê¾ÓÃ',
+   ICO_NAME             VARCHAR(64) COMMENT 'Í¼±êÎÄ¼þÃû',
+   TAG                  VARCHAR(1024) COMMENT 'ÓÃ¶ººÅ·Ö¸ô¶à¸ötag±ê¼Ç',
+   PERMIT_TYPE          INT COMMENT '1-Ë½ÓÐ£¬½öÏÞÓÐÑªÔµ¹ØÏµµÄÕÊºÅÊ¹ÓÃ
+            2-ÏòËùÓÐÓÃ»§¿ª·Å
+            3-ÓÃ»§°×Ãûµ¥¿ÉÓÃ
+            4-ÓÃ»§ºÚÃûµ¥²»¿ÉÓÃ
+            5-ÓÃ»§×é°×Ãûµ¥¿ÉÓÃ
+            6-ÓÃ»§×éºÚÃûµ¥²»¿ÉÓÃ',
+   SUPPLY_STYLE         INT COMMENT 'ÊµÊ±µ¥Ìõ£»ÅúÁ¿£» Á÷',
+   PRICEUNIT_TYPE       INT COMMENT '¶¨¼Ûµ¥Î»',
+   PRICE                DECIMAL(12,3) COMMENT '¶¨¼Û',
+   OPTIME               DATE COMMENT '³õÊ¼»¯»òÐÞ¸ÄÊ±¼ä',
+   REFRESH_TYPE         INT COMMENT 'Êý¾ÝµÄË¢ÐÂÖÜÆÚ£¬È±Ê¡ÎªÈÕ',
+   REFRESH_DATE         DATE COMMENT '×îÐÂÊý¾ÝÈÕÆÚ£¬ÉÏ´«Ê±¸üÐÂ',
+   FILE_TYPE            VARCHAR(64) COMMENT 'ÎÄ¼þ¸ñÊ½',
+   SAMPLE_FILENAME      VARCHAR(1024) COMMENT 'ÑùÀýÊý¾Ý',
+   PASSWORD             VARCHAR(64) COMMENT '²é¿´±¦²ØµÄÃÜÂë£¬´æÃ÷Âë£¬admin²éÑ¯Ìá¹©¸øÇëÇóµÄÓÃ»§£¬¿ÉÁÙÊ±²é¿´',
    COMMENT              VARCHAR(1024)
 );
 
@@ -112,11 +130,11 @@ CREATE TABLE DH_FIELD
 (
    DATAITEM_ID          INT NOT NULL,
    FIELD_ID             INT NOT NULL,
-   FIELD_RAWNAME        VARCHAR(64) COMMENT 'å­—æ®µåæˆ–æ–‡ä»¶åˆ—åï¼Œç”¨äºŽæå–æ•°æ®ä½¿ç”¨',
-   FIELD_NAME           VARCHAR(64) COMMENT 'æ•°æ®é¡¹åç§°ï¼Œåœ¨æœç´¢ç»“æžœé¡µé¢ä¸Šå±•ç¤º',
-   PRIMARY_KEY          INT COMMENT 'æ˜¯å¦æ˜¯åŽŸè¡¨ä¸­çš„ä¸»é”®ï¼Œæ˜¯æ•°æ®å»ºç«‹é“¾æŽ¥çš„id',
-   FIELD_DATATYPE       INT COMMENT 'æ•°æ®é¡¹çš„æ•°æ®ç±»åž‹',
-   FIELD_DATALENGTH     INT COMMENT 'æ•°æ®é¡¹çš„é•¿åº¦',
+   FIELD_RAWNAME        VARCHAR(64) COMMENT '×Ö¶ÎÃû»òÎÄ¼þÁÐÃû£¬ÓÃÓÚÌáÈ¡Êý¾ÝÊ¹ÓÃ',
+   FIELD_NAME           VARCHAR(64) COMMENT 'Êý¾ÝÏîÃû³Æ£¬ÔÚËÑË÷½á¹ûÒ³ÃæÉÏÕ¹Ê¾',
+   PRIMARY_KEY          INT COMMENT 'ÊÇ·ñÊÇÔ­±íÖÐµÄÖ÷¼ü£¬ÊÇÊý¾Ý½¨Á¢Á´½ÓµÄid',
+   FIELD_DATATYPE       INT COMMENT 'Êý¾ÝÏîµÄÊý¾ÝÀàÐÍ',
+   FIELD_DATALENGTH     INT COMMENT 'Êý¾ÝÏîµÄ³¤¶È',
    COMMENT              VARCHAR(1024)
 );
 
@@ -130,6 +148,17 @@ CREATE TABLE DH_GROUP
    CREATE_USER          INT,
    OPTIME               DATETIME,
    COMMENT              VARCHAR(1024)
+);
+
+/*==============================================================*/
+/* Table: DH_LOG                                                */
+/*==============================================================*/
+CREATE TABLE DH_LOG
+(
+   USER_ID              INT NOT NULL,
+   INTERFACE            VARCHAR(64) NOT NULL,
+   PARAMETER            VARCHAR(1024) NOT NULL,
+   OPTIME               DATETIME NOT NULL COMMENT '¶¨Òå»òÐÞ¸ÄÊ±¼ä'
 );
 
 /*==============================================================*/
@@ -162,30 +191,19 @@ CREATE TABLE DH_PERMITUSER
 );
 
 /*==============================================================*/
-/* Table: DH_PRICEUNIT                                          */
-/*==============================================================*/
-CREATE TABLE DH_PRICEUNIT
-(
-   PRICEUNIT_TYPE       INT NOT NULL COMMENT 'æ¡ã€ç™¾æ¡ã€åƒæ¡
-            å­—èŠ‚ã€åƒå­—èŠ‚ã€å…†å­—èŠ‚',
-   CURRENCY_TYPE        INT,
-   PRICEUNIT_NAME       VARCHAR(64)
-);
-
-/*==============================================================*/
 /* Table: DH_REPOSITORY                                         */
 /*==============================================================*/
 CREATE TABLE DH_REPOSITORY
 (
    REPOSITORY_ID        INT NOT NULL,
-   REPOSITORY_NAME      VARCHAR(64) COMMENT 'æ•°æ®æä¾›è€…èµ·çš„åå­—ï¼Œå¯¹æ¶ˆè´¹è€…æœ‰å¸å¼•åŠ›å³å¯',
+   REPOSITORY_NAME      VARCHAR(64) COMMENT 'Êý¾ÝÌá¹©ÕßÆðµÄÃû×Ö£¬¶ÔÏû·ÑÕßÓÐÎüÒýÁ¦¼´¿É',
    USER_ID              INT,
-   PERMIT_TYPE          INT COMMENT '1-ç§æœ‰ï¼Œä»…é™æœ‰è¡€ç¼˜å…³ç³»çš„å¸å·å¯è§
-            2-æ‰€æœ‰ç”¨æˆ·å¯è§
-            3-ç”¨æˆ·ç™½åå•å¯è§
-            4-ç”¨æˆ·é»‘åå•ä¸å¯è§
-            5-ç”¨æˆ·ç»„ç™½åå•å¯è§
-            6-ç”¨æˆ·ç»„é»‘åå•ä¸å¯è§'
+   PERMIT_TYPE          INT COMMENT '1-Ë½ÓÐ£¬½öÏÞÓÐÑªÔµ¹ØÏµµÄÕÊºÅ¿É¼û
+            2-ËùÓÐÓÃ»§¿É¼û
+            3-ÓÃ»§°×Ãûµ¥¿É¼û
+            4-ÓÃ»§ºÚÃûµ¥²»¿É¼û
+            5-ÓÃ»§×é°×Ãûµ¥¿É¼û
+            6-ÓÃ»§×éºÚÃûµ¥²»¿É¼û'
 );
 
 /*==============================================================*/
@@ -203,7 +221,8 @@ CREATE TABLE DH_SUPPLYSTYLE
 CREATE TABLE DH_UPLOADLOG
 (
    DATAITEM_ID          INT NOT NULL,
-   DATA_DATE            DATE NOT NULL
+   DATA_DATE            DATE NOT NULL,
+   FILENAME             VARCHAR(1024)
 );
 
 /*==============================================================*/
@@ -212,15 +231,15 @@ CREATE TABLE DH_UPLOADLOG
 CREATE TABLE DH_USER
 (
    USER_ID              INT NOT NULL,
-   USER_LEVEL           INT COMMENT '1-ç»„å†Œç”¨æˆ·
-            2-è®¤è¯ç”¨æˆ·ï¼ˆæ ¸å®šäº†èµ„è´¨ï¼‰
-            3-æŽˆæƒç”¨æˆ·ï¼ˆæœ‰æŠ¼é‡‘ï¼‰',
+   USER_LEVEL           INT COMMENT '1-×é²áÓÃ»§
+            2-ÈÏÖ¤ÓÃ»§£¨ºË¶¨ÁË×ÊÖÊ£©
+            3-ÊÚÈ¨ÓÃ»§£¨ÓÐÑº½ð£©',
    COMPANY_ID           BIGINT,
-   LOGIN_NAME           VARCHAR(64) COMMENT 'ç™»å½•ç”¨æˆ·å',
-   LOGIN_PASSWD         VARCHAR(1024) COMMENT 'å¯†ç ï¼Œéœ€å¯†æ–‡å­˜å‚¨',
+   LOGIN_NAME           VARCHAR(64) COMMENT 'µÇÂ¼ÓÃ»§Ãû',
+   LOGIN_PASSWD         VARCHAR(1024) COMMENT 'ÃÜÂë£¬ÐèÃÜÎÄ´æ´¢',
    PHONE_NO             VARCHAR(64),
    EMAIL                VARCHAR(1024),
-   USER_STATUS          INT COMMENT 'æ ‡è®°ç”¨æˆ·å¸æˆ·çŠ¶æ€ï¼Œ-1é˜»æ­¢ç™»å½•',
+   USER_STATUS          INT COMMENT '±ê¼ÇÓÃ»§ÕÊ»§×´Ì¬£¬-1×èÖ¹µÇÂ¼',
    CLONE_USER           INT
 );
 
@@ -251,114 +270,106 @@ CREATE TABLE DH_USERSTATUS
    STATUS_NAME          VARCHAR(64)
 );
 
-SET @@CHARACTER_SET_SERVER='utf8'; 
+#SET @@CHARACTER_SET_SERVER='utf8'; 
 
 INSERT INTO DH_USER VALUES ('1001', '3', NULL, 'zhhs888888', '5dc828c0e0fc5ff0e94dec595251259b', '13609251885', 'gongjing5@asiainfo.com', '1', NULL);
-INSERT INTO DH_USER VALUES ('1002', '5', NULL, 'admin', '0192023a7bbd73250516f069df18b500', '82166436', 'gongjing5@asiainfo.com', '1', NULL);
-INSERT INTO DH_USER VALUES ('1004', '3', NULL, 'sya666666', 'bde202e8ab686fec2a848e15b61744cb', '13808305511', 'gongjing5@asiainfo.com', '1', NULL);
+INSERT INTO DH_USER VALUES ('1002', '3', NULL, 'sya666666', 'bde202e8ab686fec2a848e15b61744cb', '13808305511', 'gongjing5@asiainfo.com', '1', NULL);
+INSERT INTO DH_USER VALUES ('1004', '5', NULL, 'admin', '0192023a7bbd73250516f069df18b500', '82166436', 'gongjing5@asiainfo.com', '1', NULL);
 INSERT INTO DH_USER VALUES ('2001', '5', NULL, 'fenghw', '86edd721bd0c5533aef7856bd0eb96ed', NULL, NULL, '1', NULL);
 INSERT INTO DH_USER VALUES ('2002', '5', NULL, 'gongjing', '2ae630ce03d318325426a807057d2be6', '13311288822', 'gongjing5@asiainfo.com', '1', NULL);
 
 
-INSERT INTO DH_REPOSITORY VALUES ('10', 'æ‰‹æœºä¿¡æ¯å¤§å…¨', '1002', '2');
-INSERT INTO DH_REPOSITORY VALUES ('11', 'ä½ç½®ä¿¡æ¯å¤§å…¨', '1002', '2');
-INSERT INTO DH_REPOSITORY VALUES ('20', 'å…¬å…±æ•°æ®', '2002', '2');
+INSERT INTO DH_REPOSITORY VALUES ('10', 'ÊÖ»úÐÅÏ¢´óÈ«', '1002', '2');
+INSERT INTO DH_REPOSITORY VALUES ('11', 'Î»ÖÃÐÅÏ¢´óÈ«', '1002', '2');
+INSERT INTO DH_REPOSITORY VALUES ('20', '¹«¹²Êý¾Ý', '2002', '2');
 
-INSERT INTO DH_DATAITEM VALUES ('10', '1002', '1010', 'ç»ˆç«¯ä¿¡æ¯', '/img/terminal.png','æ‰‹æœº,iphone', '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'EXCELæ–‡ä»¶', 'terminal.del', '888888', 'å¸‚åœºå­˜é‡ã€æ–°å¢žã€æµè½¬ç»ˆç«¯å“ç‰Œã€æœºåž‹ã€æ•°é‡ç­‰æƒ…å†µã€‚ç»ˆç«¯ARUPã€DOUã€ç½‘é¾„ã€æ¢æœºã€è¿å¾™ã€ç¦»ç½‘æƒ…å†µï¼ŒAPPå®‰è£…æƒ…å†µã€‚');
-INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2000', 'é“¶è”æ•°æ®','/img/unionpay.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARåŽ‹ç¼©åŒ…', NULL, '888855', 'é€šè¿‡æ•°åä¸ªç»´åº¦çš„ç‰¹å¾æŒ‡æ ‡ï¼Œå¯¹ç”¨æˆ·ç¾¤ä½“è¿›è¡Œæ¶ˆè´¹ç‰¹å¾åˆ†æžï¼Œå¸®åŠ©å•†æˆ·å‹¾å‹’å‡ºè¯¦ç»†çš„ç”¨æˆ·ç¾¤ç‰¹å¾ã€‚');
-INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2001', 'å·¥å•†æ•°æ®', '/img/industry_commerce.png',NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARåŽ‹ç¼©åŒ…', NULL, '888866', '1800ä¸‡å®¶ä¼ä¸šæ•°æ®ï¼›è¦†ç›–ä¼ä¸šã€äº‹ä¸šã€æœºå…³ã€ç¤¾ä¼šå›¢ä½“ã€æ°‘åŠžéžä¼ä¸šåŠå…¶ä»–åˆæ³•ç»„ç»‡ï¼›è¦†ç›–æ‰€æœ‰åŽ¿å¸‚ä¹¡é•‡ï¼›å…¨å›½è”ç½‘æ“ä½œï¼Œæ•°æ®åŠ¨æ€æ¯æ—¥æ±‡æ€»ï¼Œæ¬¡æ—¥æ›´æ–°ä¸Šçº¿ï¼›é€šè¿‡åŠ¨æ€æ•°æ®å®žæ—¶æ ¡éªŒç”¨æˆ·èº«ä»½çš„åˆæ³•æ€§ï¼›å®žæ—¶æ•°æ®æœåŠ¡æŽ¥å£');
-INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2002', 'ç¤¾äº¤æ•°æ®','/img/social.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARåŽ‹ç¼©åŒ…', NULL, '111111', 'äº’è”ç½‘ä¸Šå…¬å¼€æ•°æ®ï¼ˆè®ºå›ï¼Œè´´å§ï¼Œå¾®åšï¼Œå¾®ä¿¡å…¬ä¼—å·ç­‰ï¼‰ï¼Œç”¨æˆ·è¯„è®ºã€è½¬å‘ï¼Œå¯ä½œä¸ºå“ç‰Œæ•ˆæžœè¯„ä»·ï¼Œä¹Ÿå¯ä»¥ä½œä¸ºäº§å“æ”¹è¿›æˆ–è€…è¥é”€åˆ›æ„çš„ä¾æ®ã€‚');
-INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2003', 'å…¬äº¤æ•°æ®','/img/bus.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARåŽ‹ç¼©åŒ…', NULL, '111111', 'é¦–æœ«ç­å‘è½¦ï¼Œå‘è½¦é—´éš”ã€ç”©ç«™ã€æ»žç«™ã€è¡Œè½¦é€Ÿåº¦ã€è½¨è¿¹ç›‘ç®¡ã€æ­£ç‚¹å‘è½¦ã€åŒºé—´æ ¡æ—¶ã€å•è¾¹å‡†ç‚¹ä»¥åŠè€ƒå‹¤ã€è¶…é€Ÿã€åèˆªã€‚');
-INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2004', 'æ°”è±¡æ•°æ®','/img/weaher.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARåŽ‹ç¼©åŒ…', NULL, '111111', 'é£ŽåŠ›é£Žå‘ã€æ¯æ—¥å¹³å‡æ¸©åº¦ã€æ¯æ—¥æœ€é«˜æœ€ä½Žæ¸©åº¦ã€é™æ°´é‡ã€ç›¸å¯¹æ¹¿åº¦ã€æ°”åŽ‹ã€é›·ç”µè‡ªå»ºå›½ä»¥æ¥å…¨å›½2000+å›½å®¶çº§åœ°é¢è§‚æµ‹ç«™ï¼ˆäººå·¥èŒå®ˆç«™ï¼‰çš„é£Žæ¸©æ¹¿åŽ‹é›¨ï¼ˆé£ŽåŠ›é£Žå‘ã€æ¯æ—¥å¹³å‡æ¸©åº¦ã€æ¯æ—¥æœ€é«˜æœ€ä½Žæ¸©åº¦ã€é™æ°´é‡ã€ç›¸å¯¹æ¹¿åº¦ï¼‰ç­‰å„æ°”è±¡è¦ç´ è®°å½•ï¼›ä»¥åŠ5W+åŒºåŸŸè‡ªåŠ¨ç«™ï¼ˆæ— äººèŒå®ˆç«™ï¼Œ2009å¹´æŽ¥å…¥ï¼‰çš„å®žæ—¶ç›‘æµ‹æ•°æ®ã€‚');
-INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2005', 'GISåœ°å›¾','/img/GIS_map.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARåŽ‹ç¼©åŒ…', NULL, '111111', 'å…¨å›½åŸºç¡€åœ°å›¾æ•°æ®ï¼ˆ1:500/1:1000/1:2000/1:5000/1:10000/1:50000ï¼‰ã€ä¸‰ç»´æ¨¡åž‹æ•°æ®ã€360å…¨æ™¯æ•°æ®ã€é¥æ„Ÿå½±åƒæ•°æ®ã€æ ‡å‡†åœ°å€æ•°æ®ã€‚');
-INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2006', 'å†œä¸šæ•°æ®','/img/farming.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARåŽ‹ç¼©åŒ…', NULL, '111111','åŒ…æ‹¬å®è§‚ç»æµŽæ™¯æ°”æ•°æ®ã€å†œæ‘ç»Ÿè®¡æ•°æ®ã€å†œä¸šç»Ÿè®¡æ•°æ®ã€æ¸”ä¸šç»Ÿè®¡æ•°æ®ã€ç•œç‰§ä¸šç»Ÿè®¡æ•°æ®ã€æž—ä¸šç»Ÿè®¡æ•°æ®ã€ç²®é£Ÿä¸“é¢˜æ•°æ®ã€å†œäº§å“è´¸æ˜“ç»Ÿè®¡æ•°æ®ã€é¥²æ–™ä¸“é¢˜æ•°æ®ã€å¥¶ä¸šä¸“é¢˜æ•°æ®ã€æ£‰èŠ±ä¸“é¢˜æ•°æ®ï¼Œè”¬èœã€æ°´æžœã€èŒ¶å¶ã€ä¸­è¯æã€æ°´äº§å“ä»·æ ¼ç›‘æµ‹ã€‚');
-INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2007', 'çº¿ä¸Šç”µå•†é›¶å”®æ•°æ®','/img/sell.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARåŽ‹ç¼©åŒ…', NULL, '111111', 'åŒ…æ‹¬äº¬ä¸œã€å¤©çŒ«ã€äºšé©¬é€Šã€1å·åº—ã€å½“å½“ç½‘ã€æˆ‘ä¹°ç½‘ã€å›½ç¾Žã€è‹å®ã€èšç¾Žç½‘ã€ä¹å³°ç½‘ã€æ˜“è¿…ç­‰çº¿ä¸Šç”µå•†æ•°æ®ã€‚');
-INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2008', 'çº¿ä¸ŠåŒ»è¯æ•°æ®','/img/medicine.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARåŽ‹ç¼©åŒ…', NULL, '111111', 'åŒ…æ‹¬å£¹è¯ç½‘ã€åº·çˆ±ã€è€ç™¾å§“å¤§è¯æˆ¿ã€å¥½è¯å¸ˆã€é‡‘è±¡ç½‘ç­‰');
-INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2009', 'å½±è§†æ•°æ®','/img/film.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARåŽ‹ç¼©åŒ…', NULL, '111111', 'åŒ…æ‹¬ä¼˜é…·ã€çˆ±å¥‡è‰ºã€æœç‹è§†é¢‘ã€è…¾è®¯è§†é¢‘ã€ä¹è§†ç½‘ã€è±†ç“£ã€1905ç­‰');
-INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2010', 'æ—…æ¸¸ä¿¡æ¯','/img/trip.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARåŽ‹ç¼©åŒ…', NULL, '111111', 'åŒ…æ‹¬æºç¨‹ã€åŽ»å“ªå„¿ã€é€”ç‰›ç­‰æ•°æ®ã€‚');
-INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2011', 'äº¤é€šæ•°æ®','/img/traffic.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARåŽ‹ç¼©åŒ…', NULL, '111111', 'å…¨å›½31ä¸ªçœçº§é‡ç‚¹è¥è¿è½¦è¾†200ä¸‡è¾†');
-INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2012', 'APPæ•°æ®','/img/APP.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARåŽ‹ç¼©åŒ…', NULL, '111111', 'å…¨å›½å®‰å“ç³»ç»Ÿå†…Appåº”ç”¨çš„ç•™å­˜ç”¨æˆ·ã€æ–°å¢žç”¨æˆ·ã€åœ¨çº¿ç”¨æˆ·ã€æŽ¨é€æ•°æ®ã€ç”¨æˆ·ç‚¹å‡»è¡Œä¸ºç­‰æ ¸å¿ƒæ•°æ®');
-INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2013', 'æ–°æµªå¾®åšæ•°æ®','/img/sina_weibo.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARåŽ‹ç¼©åŒ…', NULL, '111111', 'æ–°æµªå¾®åšè´¦å·ç»Ÿè®¡æ•°æ®ï¼Œ7Ã—24hå…¨å¤©å€™å®žæ—¶ç›‘æµ‹ï¼Œè´¦å·åˆ†æžã€äº’åŠ¨åˆ†æžã€ç²‰ä¸åˆ†æž3æ–¹é¢å…±è®¡11ä¸ªä¸“ä¸šæ•°æ®ç»´åº¦ï¼›è…¾è®¯å¾®åšè´¦å·ç»Ÿè®¡æ•°æ®ï¼›ç²‰ä¸å±žæ€§åŠè¡Œä¸ºåˆ†æžï¼›å¾®åšä¼ æ’­æ•°æ®åˆ†æžï¼›è´¦å·äº’åŠ¨åˆ†æžï¼›è¡Œä¸šæ ‡æ†æ•°æ®å¯¹æ¯”åˆ†æžã€‚');
-INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2014', 'è½¦è¾†è¿ç« æŸ¥è¯¢ã€ç”Ÿæ´»æœåŠ¡ã€å®šä½æœåŠ¡ã€é‡‘èžå¾ä¿¡','/img/car_peccancy.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARåŽ‹ç¼©åŒ…', NULL, '111111', 'å…¨å›½è½¦è¾†è¿ç« æŸ¥è¯¢ã€‚');
-INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2015', 'äººè„¸è¯†åˆ«','/img/face_identify.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARåŽ‹ç¼©åŒ…', NULL, '111111', 'äººè„¸è¯†åˆ«èº«ä»½ä¿¡æ¯ã€‚');
+INSERT INTO DH_DATAITEM VALUES ('10', '1002', '1010', 'ÖÕ¶ËÐÅÏ¢', 'terminal.png', 'ÊÖ»ú,iphone', '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'EXCELÎÄ¼þ', 'terminal.del', '888888', 'ÊÐ³¡´æÁ¿¡¢ÐÂÔö¡¢Á÷×ªÖÕ¶ËÆ·ÅÆ¡¢»úÐÍ¡¢ÊýÁ¿µÈÇé¿ö¡£ÖÕ¶ËARUP¡¢DOU¡¢ÍøÁä¡¢»»»ú¡¢Ç¨áã¡¢ÀëÍøÇé¿ö£¬APP°²×°Çé¿ö¡£');
+INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2000', 'ÒøÁªÊý¾Ý', 'unionpay.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARÑ¹Ëõ°ü', NULL, '888855', 'Í¨¹ýÊýÊ®¸öÎ¬¶ÈµÄÌØÕ÷Ö¸±ê£¬¶ÔÓÃ»§ÈºÌå½øÐÐÏû·ÑÌØÕ÷·ÖÎö£¬°ïÖúÉÌ»§¹´ÀÕ³öÏêÏ¸µÄÓÃ»§ÈºÌØÕ÷¡£');
+INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2001', '¹¤ÉÌÊý¾Ý', 'industry_commerc.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARÑ¹Ëõ°ü', NULL, '888866', '1800Íò¼ÒÆóÒµÊý¾Ý£»¸²¸ÇÆóÒµ¡¢ÊÂÒµ¡¢»ú¹Ø¡¢Éç»áÍÅÌå¡¢Ãñ°ì·ÇÆóÒµ¼°ÆäËûºÏ·¨×éÖ¯£»¸²¸ÇËùÓÐÏØÊÐÏçÕò£»È«¹úÁªÍø²Ù×÷£¬Êý¾Ý¶¯Ì¬Ã¿ÈÕ»ã×Ü£¬´ÎÈÕ¸üÐÂÉÏÏß£»Í¨¹ý¶¯Ì¬Êý¾ÝÊµÊ±Ð£ÑéÓÃ»§Éí·ÝµÄºÏ·¨ÐÔ£»ÊµÊ±Êý¾Ý·þÎñ½Ó¿Ú');
+INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2002', 'Éç½»Êý¾Ý', 'social.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARÑ¹Ëõ°ü', NULL, '111111', '»¥ÁªÍøÉÏ¹«¿ªÊý¾Ý£¨ÂÛÌ³£¬Ìù°É£¬Î¢²©£¬Î¢ÐÅ¹«ÖÚºÅµÈ£©£¬ÓÃ»§ÆÀÂÛ¡¢×ª·¢£¬¿É×÷ÎªÆ·ÅÆÐ§¹ûÆÀ¼Û£¬Ò²¿ÉÒÔ×÷Îª²úÆ·¸Ä½ø»òÕßÓªÏú´´ÒâµÄÒÀ¾Ý¡£');
+INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2003', '¹«½»Êý¾Ý', 'bus.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARÑ¹Ëõ°ü', NULL, '111111', 'Ê×Ä©°à·¢³µ£¬·¢³µ¼ä¸ô¡¢Ë¦Õ¾¡¢ÖÍÕ¾¡¢ÐÐ³µËÙ¶È¡¢¹ì¼£¼à¹Ü¡¢Õýµã·¢³µ¡¢Çø¼äÐ£Ê±¡¢µ¥±ß×¼µãÒÔ¼°¿¼ÇÚ¡¢³¬ËÙ¡¢Æ«º½¡£');
+INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2004', 'ÆøÏóÊý¾Ý', 'weather.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARÑ¹Ëõ°ü', NULL, '111111', '·çÁ¦·çÏò¡¢Ã¿ÈÕÆ½¾ùÎÂ¶È¡¢Ã¿ÈÕ×î¸ß×îµÍÎÂ¶È¡¢½µË®Á¿¡¢Ïà¶ÔÊª¶È¡¢ÆøÑ¹¡¢À×µç×Ô½¨¹úÒÔÀ´È«¹ú2000+¹ú¼Ò¼¶µØÃæ¹Û²âÕ¾£¨ÈË¹¤Ö°ÊØÕ¾£©µÄ·çÎÂÊªÑ¹Óê£¨·çÁ¦·çÏò¡¢Ã¿ÈÕÆ½¾ùÎÂ¶È¡¢Ã¿ÈÕ×î¸ß×îµÍÎÂ¶È¡¢½µË®Á¿¡¢Ïà¶ÔÊª¶È£©µÈ¸÷ÆøÏóÒªËØ¼ÇÂ¼£»ÒÔ¼°5W+ÇøÓò×Ô¶¯Õ¾£¨ÎÞÈËÖ°ÊØÕ¾£¬2009Äê½ÓÈë£©µÄÊµÊ±¼à²âÊý¾Ý¡£');
+INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2005', 'GISµØÍ¼', 'GIS_map.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARÑ¹Ëõ°ü', NULL, '111111', 'È«¹ú»ù´¡µØÍ¼Êý¾Ý£¨1:500/1:1000/1:2000/1:5000/1:10000/1:50000£©¡¢ÈýÎ¬Ä£ÐÍÊý¾Ý¡¢360È«¾°Êý¾Ý¡¢Ò£¸ÐÓ°ÏñÊý¾Ý¡¢±ê×¼µØÖ·Êý¾Ý¡£');
+INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2006', 'Å©ÒµÊý¾Ý', 'farming.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARÑ¹Ëõ°ü', NULL, '111111', '°üÀ¨ºê¹Û¾­¼Ã¾°ÆøÊý¾Ý¡¢Å©´åÍ³¼ÆÊý¾Ý¡¢Å©ÒµÍ³¼ÆÊý¾Ý¡¢ÓæÒµÍ³¼ÆÊý¾Ý¡¢ÐóÄÁÒµÍ³¼ÆÊý¾Ý¡¢ÁÖÒµÍ³¼ÆÊý¾Ý¡¢Á¸Ê³×¨ÌâÊý¾Ý¡¢Å©²úÆ·Ã³Ò×Í³¼ÆÊý¾Ý¡¢ËÇÁÏ×¨ÌâÊý¾Ý¡¢ÄÌÒµ×¨ÌâÊý¾Ý¡¢ÃÞ»¨×¨ÌâÊý¾Ý£¬Êß²Ë¡¢Ë®¹û¡¢²èÒ¶¡¢ÖÐÒ©²Ä¡¢Ë®²úÆ·¼Û¸ñ¼à²â¡£');
+INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2007', 'ÏßÉÏµçÉÌÁãÊÛÊý¾Ý', 'sell.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARÑ¹Ëõ°ü', NULL, '111111', '°üÀ¨¾©¶«¡¢ÌìÃ¨¡¢ÑÇÂíÑ·¡¢1ºÅµê¡¢µ±µ±Íø¡¢ÎÒÂòÍø¡¢¹úÃÀ¡¢ËÕÄþ¡¢¾ÛÃÀÍø¡¢ÀÖ·åÍø¡¢Ò×Ñ¸µÈÏßÉÏµçÉÌÊý¾Ý¡£');
+INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2008', 'ÏßÉÏÒ½Ò©Êý¾Ý', 'medicine.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARÑ¹Ëõ°ü', NULL, '111111', '°üÀ¨Ò¼Ò©Íø¡¢¿µ°®¡¢ÀÏ°ÙÐÕ´óÒ©·¿¡¢ºÃÒ©Ê¦¡¢½ðÏóÍøµÈ');
+INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2009', 'Ó°ÊÓÊý¾Ý', 'film.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARÑ¹Ëõ°ü', NULL, '111111', '°üÀ¨ÓÅ¿á¡¢°®ÆæÒÕ¡¢ËÑºüÊÓÆµ¡¢ÌÚÑ¶ÊÓÆµ¡¢ÀÖÊÓÍø¡¢¶¹°ê¡¢1905µÈ');
+INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2010', 'ÂÃÓÎÐÅÏ¢', 'trip.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARÑ¹Ëõ°ü', NULL, '111111', '°üÀ¨Ð¯³Ì¡¢È¥ÄÄ¶ù¡¢Í¾Å£µÈÊý¾Ý¡£');
+INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2011', '½»Í¨Êý¾Ý', 'traffic.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARÑ¹Ëõ°ü', NULL, '111111', 'È«¹ú31¸öÊ¡¼¶ÖØµãÓªÔË³µÁ¾200ÍòÁ¾');
+INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2012', 'APPÊý¾Ý', 'app.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARÑ¹Ëõ°ü', NULL, '111111', 'È«¹ú°²×¿ÏµÍ³ÄÚAppÓ¦ÓÃµÄÁô´æÓÃ»§¡¢ÐÂÔöÓÃ»§¡¢ÔÚÏßÓÃ»§¡¢ÍÆËÍÊý¾Ý¡¢ÓÃ»§µã»÷ÐÐÎªµÈºËÐÄÊý¾Ý');
+INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2013', 'ÐÂÀËÎ¢²©Êý¾Ý', 'sina_weibo.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARÑ¹Ëõ°ü', NULL, '111111', 'ÐÂÀËÎ¢²©ÕËºÅÍ³¼ÆÊý¾Ý£¬7¡Á24hÈ«ÌìºòÊµÊ±¼à²â£¬ÕËºÅ·ÖÎö¡¢»¥¶¯·ÖÎö¡¢·ÛË¿·ÖÎö3·½Ãæ¹²¼Æ11¸ö×¨ÒµÊý¾ÝÎ¬¶È£»ÌÚÑ¶Î¢²©ÕËºÅÍ³¼ÆÊý¾Ý£»·ÛË¿ÊôÐÔ¼°ÐÐÎª·ÖÎö£»Î¢²©´«²¥Êý¾Ý·ÖÎö£»ÕËºÅ»¥¶¯·ÖÎö£»ÐÐÒµ±ê¸ËÊý¾Ý¶Ô±È·ÖÎö¡£');
+INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2014', '³µÁ¾Î¥ÕÂ²éÑ¯¡¢Éú»î·þÎñ¡¢¶¨Î»·þÎñ¡¢½ðÈÚÕ÷ÐÅ', 'car_peccancy.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARÑ¹Ëõ°ü', NULL, '111111', 'È«¹ú³µÁ¾Î¥ÕÂ²éÑ¯¡£');
+INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2015', 'ÈËÁ³Ê¶±ð', 'face_identify.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RARÑ¹Ëõ°ü', NULL, '111111', 'ÈËÁ³Ê¶±ðÉí·ÝÐÅÏ¢¡£');
 
-INSERT INTO DH_FIELD VALUES ('1010', '1', 'phone_id', 'æ‰‹æœºåž‹å·', '1', '1', NULL,'');
-INSERT INTO DH_FIELD VALUES ('1010', '2', 'phone_brand', 'å“ç‰Œ', '0', '2', '16','');
-INSERT INTO DH_FIELD VALUES ('1010', '3', 'company', 'å‡ºå“åŽ‚å•†', '0', '2', '16','');
-INSERT INTO DH_FIELD VALUES ('1010', '4', 'price', 'å®šä»·', '0', '3', NULL,'');
-INSERT INTO DH_FIELD VALUES ('1010', '5', 'first_date', 'å…¥ç½‘æ—¥æœŸ', '0', '4', NULL,'');
-INSERT INTO DH_FIELD VALUES ('1010', '6', 'amount', 'æ•°é‡', '0', '1', NULL,'');
-
-
-
-INSERT INTO DH_FIELD VALUES ('1011', '1', 'phone_id', 'æ‰‹æœºåž‹å·', '1', '1', NULL,NULL);
-INSERT INTO DH_FIELD VALUES ('1011', '2', 'phone_brand', 'æ‰‹æœºå“ç‰Œ', '0', '2', '16',NULL);
-INSERT INTO DH_FIELD VALUES ('1011', '3', 'time_band', 'æ—¶é—´æ®µ', '0', '2', '16',NULL);
-INSERT INTO DH_FIELD VALUES ('1011', '4', 'call_counts', 'é€šè¯æ¬¡æ•°', '0', '3', NULL,NULL);
-INSERT INTO DH_FIELD VALUES ('1011', '5', 'amount', 'äº§ç”Ÿçš„ç½‘ç»œæµé‡', '0', '4', NULL,NULL);
-
-INSERT INTO DH_FIELD VALUES ('1012', '1', 'phone_id', 'æ‰‹æœºåž‹å·', '1', '1', NULL,NULL);
-INSERT INTO DH_FIELD VALUES ('1012', '2', 'phone_brand', 'æ‰‹æœºå“ç‰Œ', '0', '2', '16',NULL);
-INSERT INTO DH_FIELD VALUES ('1012', '3', 'position_name', 'ä½ç½®åç§°', '0', '2', '16',NULL);
-INSERT INTO DH_FIELD VALUES ('1012', '4', 'call_counts', 'é€šè¯æ¬¡æ•°', '0', '3', NULL,NULL);
-INSERT INTO DH_FIELD VALUES ('1012', '5', 'amount', 'äº§ç”Ÿçš„ç½‘ç»œæµé‡', '0','4',NULL,NULL);
-INSERT INTO DH_FIELD VALUES ('1012', '6', 'call_time', 'é¦–æ¬¡é€šè¯æ—¶é—´', '0', '4',NULL,NULL);
-
-INSERT INTO DH_FIELD VALUES ('1013', '1', 'phone_id', 'æ‰‹æœºåž‹å·', '1', '1', NULL,NULL);
-INSERT INTO DH_FIELD VALUES ('1013', '2', 'gender', 'æ€§åˆ«', '0', '2', '16',NULL);
-INSERT INTO DH_FIELD VALUES ('1013', '3', 'age', 'å¹´é¾„', '0', '2', '16',NULL);
-INSERT INTO DH_FIELD VALUES ('1013', '4', 'in_years', 'å…¥ç½‘æ—¶é•¿', '0', '3', NULL,NULL);
-INSERT INTO DH_FIELD VALUES ('1013', '5', 'hobby', 'å…´è¶£çˆ±å¥½', '0','4',NULL,NULL);
+INSERT INTO DH_FIELD VALUES ('1010', '1', 'phone_id', 'ÊÖ»úÐÍºÅ', '1', '1', NULL,'');
+INSERT INTO DH_FIELD VALUES ('1010', '2', 'phone_brand', 'Æ·ÅÆ', '0', '2', '16','');
+INSERT INTO DH_FIELD VALUES ('1010', '3', 'company', '³öÆ·³§ÉÌ', '0', '2', '16','');
+INSERT INTO DH_FIELD VALUES ('1010', '4', 'price', '¶¨¼Û', '0', '3', NULL,'');
+INSERT INTO DH_FIELD VALUES ('1010', '5', 'first_date', 'ÈëÍøÈÕÆÚ', '0', '4', NULL,'');
+INSERT INTO DH_FIELD VALUES ('1010', '6', 'amount', 'ÊýÁ¿', '0', '1', NULL,'');
 
 
-INSERT INTO DH_UPLOADLOG VALUES ('1010', '2015-09-05');
-INSERT INTO DH_UPLOADLOG VALUES ('1010', '2015-08-05');
-INSERT INTO DH_UPLOADLOG VALUES ('1010', '2015-07-05');
-INSERT INTO DH_UPLOADLOG VALUES ('1010', '2015-06-05');
-INSERT INTO DH_DOWNLOADLOG VALUES ('1010', '2015-08-05', '1001', '2015-08-06 17:34:27');
-INSERT INTO DH_DOWNLOADLOG VALUES ('1010', '2015-07-05', '1001', '2015-07-06 17:34:59');
-INSERT INTO DH_DOWNLOADLOG VALUES ('1010', '2015-06-05', '1001', '2015-06-06 17:35:29');
 
-INSERT INTO DH_USERLEVEL VALUES ('1', 'æ³¨å†Œç”¨æˆ·');
-INSERT INTO DH_USERLEVEL VALUES ('2', 'è®¤è¯ç”¨æˆ·');
-INSERT INTO DH_USERLEVEL VALUES ('3', 'VIPç”¨æˆ·');
+INSERT INTO DH_FIELD VALUES ('1011', '1', 'phone_id', 'ÊÖ»úÐÍºÅ', '1', '1', NULL,NULL);
+INSERT INTO DH_FIELD VALUES ('1011', '2', 'phone_brand', 'ÊÖ»úÆ·ÅÆ', '0', '2', '16',NULL);
+INSERT INTO DH_FIELD VALUES ('1011', '3', 'time_band', 'Ê±¼ä¶Î', '0', '2', '16',NULL);
+INSERT INTO DH_FIELD VALUES ('1011', '4', 'call_counts', 'Í¨»°´ÎÊý', '0', '3', NULL,NULL);
+INSERT INTO DH_FIELD VALUES ('1011', '5', 'amount', '²úÉúµÄÍøÂçÁ÷Á¿', '0', '4', NULL,NULL);
 
-INSERT INTO DH_USERSTATUS VALUES ('1', 'æ­£å¸¸');
-INSERT INTO DH_USERSTATUS VALUES ('2', 'å°é”');
-INSERT INTO DH_USERSTATUS VALUES ('3', 'æ³¨é”€');
+INSERT INTO DH_FIELD VALUES ('1012', '1', 'phone_id', 'ÊÖ»úÐÍºÅ', '1', '1', NULL,NULL);
+INSERT INTO DH_FIELD VALUES ('1012', '2', 'phone_brand', 'ÊÖ»úÆ·ÅÆ', '0', '2', '16',NULL);
+INSERT INTO DH_FIELD VALUES ('1012', '3', 'position_name', 'Î»ÖÃÃû³Æ', '0', '2', '16',NULL);
+INSERT INTO DH_FIELD VALUES ('1012', '4', 'call_counts', 'Í¨»°´ÎÊý', '0', '3', NULL,NULL);
+INSERT INTO DH_FIELD VALUES ('1012', '5', 'amount', '²úÉúµÄÍøÂçÁ÷Á¿', '0','4',NULL,NULL);
+INSERT INTO DH_FIELD VALUES ('1012', '6', 'call_time', 'Ê×´ÎÍ¨»°Ê±¼ä', '0', '4',NULL,NULL);
 
-INSERT INTO DH_CURRENCY VALUES ('1', 'äººæ°‘å¸', 'ä¸­å›½é“¶è¡Œå‘è¡Œçš„é’žç¥¨');
-INSERT INTO DH_CURRENCY VALUES ('2', 'ç¾Žå…ƒ', 'å±±å§†å¤§å”çš„ç»¿çº¸');
-INSERT INTO DH_CURRENCY VALUES ('3', 'Qå¸', 'è…¾è®¯å…¬å¸çš„è™šæ‹Ÿå¸');
-INSERT INTO DH_CURRENCY VALUES ('4', 'æ¯”ç‰¹å¸', 'ä¸€ä¸ªç¥žå¥‡çš„å¸ç§');
-
-INSERT INTO DH_PERMITTYPE VALUES ('1', 'ç§æœ‰');
-INSERT INTO DH_PERMITTYPE VALUES ('2', 'å…¬æœ‰');
-INSERT INTO DH_PERMITTYPE VALUES ('3', 'ç”¨æˆ·ç™½åå•å¯è§');
-INSERT INTO DH_PERMITTYPE VALUES ('4', 'ç”¨æˆ·é»‘åå•ä¸å¯è§');
-INSERT INTO DH_PERMITTYPE VALUES ('5', 'ç»„ç™½åå•å¯è§');
-INSERT INTO DH_PERMITTYPE VALUES ('6', 'ç»„é»‘åå•ä¸å¯è§');
+INSERT INTO DH_FIELD VALUES ('1013', '1', 'phone_id', 'ÊÖ»úÐÍºÅ', '1', '1', NULL,NULL);
+INSERT INTO DH_FIELD VALUES ('1013', '2', 'gender', 'ÐÔ±ð', '0', '2', '16',NULL);
+INSERT INTO DH_FIELD VALUES ('1013', '3', 'age', 'ÄêÁä', '0', '2', '16',NULL);
+INSERT INTO DH_FIELD VALUES ('1013', '4', 'in_years', 'ÈëÍøÊ±³¤', '0', '3', NULL,NULL);
+INSERT INTO DH_FIELD VALUES ('1013', '5', 'hobby', 'ÐËÈ¤°®ºÃ', '0','4',NULL,NULL);
 
 
-INSERT INTO DH_PRICEUNIT VALUES ('10', '1', 'å•æ¡');
-INSERT INTO DH_PRICEUNIT VALUES ('11', '1', '1åƒæ¡');
-INSERT INTO DH_PRICEUNIT VALUES ('20', '1', '1ä¸ªå‘¨æœŸå…¨éƒ¨æ•°æ®');
-INSERT INTO DH_PRICEUNIT VALUES ('30', '1', '1å°æ—¶æµé‡');
+INSERT INTO DH_USERLEVEL VALUES ('1', '×¢²áÓÃ»§');
+INSERT INTO DH_USERLEVEL VALUES ('2', 'ÈÏÖ¤ÓÃ»§');
+INSERT INTO DH_USERLEVEL VALUES ('3', 'VIPÓÃ»§');
 
-INSERT INTO DH_SUPPLYSTYLE VALUES ('1', 'æ‰¹é‡');
-INSERT INTO DH_SUPPLYSTYLE VALUES ('2', 'å°æ‰¹');
-INSERT INTO DH_SUPPLYSTYLE VALUES ('3', 'æµæ•°æ®');
-INSERT INTO DH_SUPPLYSTYLE VALUES ('4', 'å•æ¡æŸ¥è¯¢');
+INSERT INTO DH_USERSTATUS VALUES ('1', 'Õý³£');
+INSERT INTO DH_USERSTATUS VALUES ('2', '·âËø');
+INSERT INTO DH_USERSTATUS VALUES ('3', '×¢Ïú');
+
+INSERT INTO DH_CURRENCY VALUES ('1', 'ÈËÃñ±Ò', 'ÖÐ¹úÒøÐÐ·¢ÐÐµÄ³®Æ±');
+INSERT INTO DH_CURRENCY VALUES ('2', 'ÃÀÔª', 'É½Ä·´óÊåµÄÂÌÖ½');
+INSERT INTO DH_CURRENCY VALUES ('3', 'Q±Ò', 'ÌÚÑ¶¹«Ë¾µÄÐéÄâ±Ò');
+INSERT INTO DH_CURRENCY VALUES ('4', '±ÈÌØ±Ò', 'Ò»¸öÉñÆæµÄ±ÒÖÖ');
+
+INSERT INTO DH_PERMITTYPE VALUES ('1', 'Ë½ÓÐ');
+INSERT INTO DH_PERMITTYPE VALUES ('2', '¹«ÓÐ');
+INSERT INTO DH_PERMITTYPE VALUES ('3', 'ÓÃ»§°×Ãûµ¥¿É¼û');
+INSERT INTO DH_PERMITTYPE VALUES ('4', 'ÓÃ»§ºÚÃûµ¥²»¿É¼û');
+INSERT INTO DH_PERMITTYPE VALUES ('5', '×é°×Ãûµ¥¿É¼û');
+INSERT INTO DH_PERMITTYPE VALUES ('6', '×éºÚÃûµ¥²»¿É¼û');
+
+
+INSERT INTO DH_PRICEUNIT VALUES ('10', '1', 'µ¥Ìõ');
+INSERT INTO DH_PRICEUNIT VALUES ('11', '1', '1Ç§Ìõ');
+INSERT INTO DH_PRICEUNIT VALUES ('20', '1', '1¸öÖÜÆÚÈ«²¿Êý¾Ý');
+INSERT INTO DH_PRICEUNIT VALUES ('30', '1', '1Ð¡Ê±Á÷Á¿');
+
+INSERT INTO DH_SUPPLYSTYLE VALUES ('1', 'ÅúÁ¿');
+INSERT INTO DH_SUPPLYSTYLE VALUES ('2', 'Ð¡Åú');
+INSERT INTO DH_SUPPLYSTYLE VALUES ('3', 'Á÷Êý¾Ý');
+INSERT INTO DH_SUPPLYSTYLE VALUES ('4', 'µ¥Ìõ²éÑ¯');
 COMMIT;
 
 
-## DH_USERï¼ŒDH_REPOSITORY è®¾ç½®ä¸»é”®ã€è‡ªå¢ž
+## DH_USER£¬DH_REPOSITORY ÉèÖÃÖ÷¼ü¡¢×ÔÔö
 ALTER TABLE DH_USER MODIFY USER_ID INT UNSIGNED NOT NULL AUTO_INCREMENT,
 ADD PRIMARY KEY(USER_ID);
 
 ALTER TABLE DH_REPOSITORY MODIFY REPOSITORY_ID INT UNSIGNED NOT NULL AUTO_INCREMENT,
 ADD PRIMARY KEY(REPOSITORY_ID);
 
-SELECT * FROM DH_DATAITEM WHERE DATAITEM_NAME="æ‰‹æœºå¼€é€š";
+SELECT * FROM DH_DATAITEM WHERE DATAITEM_NAME="ÊÖ»ú¿ªÍ¨";
 ;
 ;
