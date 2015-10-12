@@ -43,6 +43,8 @@ ENV PATH $PATH:/usr/local/mysql/bin:/usr/local/mysql/scripts
 # this is only for 5.5 since it doesn't have an APT repo, and will go away when 5.5 does
 RUN mkdir -p /etc/mysql/conf.d \
 	&& { \
+		echo '[client]'; \
+		echo 'default-character-set=utf8'; \
 		echo '[mysqld]'; \
 		echo 'skip-host-cache'; \
 		echo 'skip-name-resolve'; \
@@ -50,7 +52,6 @@ RUN mkdir -p /etc/mysql/conf.d \
 		echo 'datadir = /var/lib/mysql'; \
 		echo 'character_set_server=utf8'; \
 		echo 'character_set_client=utf8'; \
-		echo 'character_set_connection=utf8'; \
 		echo 'character_set_results=utf8'; \
 		echo 'character_set_database=utf8'; \
 		echo '!includedir /etc/mysql/conf.d/'; \
