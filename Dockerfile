@@ -51,9 +51,6 @@ RUN mkdir -p /etc/mysql/conf.d \
 		echo 'user = mysql'; \
 		echo 'datadir = /var/lib/mysql'; \
 		echo 'character_set_server=utf8'; \
-		echo 'character_set_client=utf8'; \
-		echo 'character_set_results=utf8'; \
-		echo 'character_set_database=utf8'; \
 		echo '!includedir /etc/mysql/conf.d/'; \
 	} > /etc/mysql/my.cnf
 
