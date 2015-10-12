@@ -67,6 +67,7 @@ if [ "$1" = 'mysqld' ]; then
 			 echo "SET character_set_database = utf8;" | "${mysql[@]}"
 			 echo "SET character_set_results = utf8;" | "${mysql[@]}"
 			 echo "SET character_set_server = utf8;" | "${mysql[@]}"
+			 echo "SET character_set_system = utf8;" | "${mysql[@]}"
 		fi
 
 		if [ "$MYSQL_USER" -a "$MYSQL_PASSWORD" ]; then
