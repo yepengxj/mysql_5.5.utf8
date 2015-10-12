@@ -62,6 +62,11 @@ if [ "$1" = 'mysqld' ]; then
 		if [ "$MYSQL_DATABASE" ]; then
 			echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` ;" | "${mysql[@]}"
 			mysql+=( "$MYSQL_DATABASE" )
+			 echo" SET character_set_client = utf8 ;" | "${mysql[@]}"
+			 echo" SET character_set_connection = utf8 ;" | "${mysql[@]}"
+			 echo" SET character_set_database = utf8 ;" | "${mysql[@]}"
+			 echo" SET character_set_results = utf8 ;" | "${mysql[@]}"
+			 echo" SET character_set_server = utf8 ;" | "${mysql[@]}"
 		fi
 
 		if [ "$MYSQL_USER" -a "$MYSQL_PASSWORD" ]; then
