@@ -285,7 +285,7 @@ INSERT INTO DH_REPOSITORY VALUES ('20', '公共数据', '2002', '2');
 
 INSERT INTO DH_DATAITEM VALUES ('10', '1002', '1010', '终端信息', 'terminal.png', '手机,iphone', '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'EXCEL文件', 'terminal.del', '888888', '市场存量、新增、流转终端品牌、机型、数量等情况。终端ARUP、DOU、网龄、换机、迁徙、离网情况，APP安装情况。');
 INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2000', '银联数据', 'unionpay.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RAR压缩包', NULL, '888855', '通过数十个维度的特征指标，对用户群体进行消费特征分析，帮助商户勾勒出详细的用户群特征。');
-INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2001', '工商数据', 'industry_commerc.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RAR压缩包', NULL, '888866', '1800万家企业数据；覆盖企业、事业、机关、社会团体、民办非企业及其他合法组织；覆盖所有县市乡镇；全国联网操作，数据动态每日汇总，次日更新上线；通过动态数据实时校验用户身份的合法性；实时数据服务接口');
+INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2001', '工商数据', 'industry_commerce.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RAR压缩包', NULL, '888866', '1800万家企业数据；覆盖企业、事业、机关、社会团体、民办非企业及其他合法组织；覆盖所有县市乡镇；全国联网操作，数据动态每日汇总，次日更新上线；通过动态数据实时校验用户身份的合法性；实时数据服务接口');
 INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2002', '社交数据', 'social.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RAR压缩包', NULL, '111111', '互联网上公开数据（论坛，贴吧，微博，微信公众号等），用户评论、转发，可作为品牌效果评价，也可以作为产品改进或者营销创意的依据。');
 INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2003', '公交数据', 'bus.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RAR压缩包', NULL, '111111', '首末班发车，发车间隔、甩站、滞站、行车速度、轨迹监管、正点发车、区间校时、单边准点以及考勤、超速、偏航。');
 INSERT INTO DH_DATAITEM VALUES ('20', '1004', '2004', '气象数据', 'weather.png', NULL, '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RAR压缩包', NULL, '111111', '风力风向、每日平均温度、每日最高最低温度、降水量、相对湿度、气压、雷电自建国以来全国2000+国家级地面观测站（人工职守站）的风温湿压雨（风力风向、每日平均温度、每日最高最低温度、降水量、相对湿度）等各气象要素记录；以及5W+区域自动站（无人职守站，2009年接入）的实时监测数据。');
@@ -350,6 +350,12 @@ INSERT INTO DH_PERMITTYPE VALUES ('4', '用户黑名单不可见');
 INSERT INTO DH_PERMITTYPE VALUES ('5', '组白名单可见');
 INSERT INTO DH_PERMITTYPE VALUES ('6', '组黑名单不可见');
 
+
+INSERT INTO DH_PRICEUNIT VALUES ('10', '1', '单条');
+INSERT INTO DH_PRICEUNIT VALUES ('11', '1', '1千条');
+INSERT INTO DH_PRICEUNIT VALUES ('20', '1', '1个周期全部数据');
+INSERT INTO DH_PRICEUNIT VALUES ('30', '1', '1小时流量');
+
 INSERT INTO DH_SUPPLYSTYLE VALUES ('1', '批量');
 INSERT INTO DH_SUPPLYSTYLE VALUES ('2', '小批');
 INSERT INTO DH_SUPPLYSTYLE VALUES ('3', '流数据');
@@ -365,5 +371,3 @@ ALTER TABLE DH_REPOSITORY MODIFY REPOSITORY_ID INT UNSIGNED NOT NULL AUTO_INCREM
 ADD PRIMARY KEY(REPOSITORY_ID);
 
 SELECT * FROM DH_DATAITEM WHERE DATAITEM_NAME="手机开通";
-;
-;
