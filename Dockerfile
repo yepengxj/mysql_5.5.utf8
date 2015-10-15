@@ -1,7 +1,7 @@
-FROM debian:jessie
+FROM ubuntu:14.04
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-RUN export LC_ALL=C.UTF-8
+RUN export LC_ALL=en_US.UTF-8
 RUN groupadd -r mysql && useradd -r -g mysql mysql
 
 RUN mkdir /docker-entrypoint-initdb.d
@@ -43,6 +43,8 @@ ENV PATH $PATH:/usr/local/mysql/bin:/usr/local/mysql/scripts
 # this is only for 5.5 since it doesn't have an APT repo, and will go away when 5.5 does
 RUN mkdir -p /etc/mysql/conf.d \
 	&& { \
+		echo '[client]'; \
+		echo 'default-character-set=utf8'; \
 		echo '[mysqld]'; \
 		echo 'skip-host-cache'; \
 		echo 'skip-name-resolve'; \
