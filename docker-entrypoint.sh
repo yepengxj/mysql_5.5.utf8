@@ -60,6 +60,9 @@ if [ "$1" = 'mysqld' ]; then
 		fi
 
 		if [ "$MYSQL_DATABASE" ]; then
+			if [ "$MYSQL_DROPDATABASE" ]; then
+				echo "DROP DATABASE IF EXISTS \`$MYSQL_DATABASE\` ;" | "${mysql[@]}"
+			fi
 			echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` ;" | "${mysql[@]}"
 			mysql+=( "$MYSQL_DATABASE" )
 			 echo "SET character_set_client=utf8;" | "${mysql[@]}"
