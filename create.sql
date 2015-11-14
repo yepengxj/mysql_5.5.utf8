@@ -1,18 +1,16 @@
 DROP TABLE IF EXISTS DH_CHARGE;
 
-DROP TABLE IF EXISTS DH_COMPANY;
-
-DROP TABLE IF EXISTS DH_CURRENCY;
+DROP TABLE IF EXISTS DH_COMPANYINFO;
 
 DROP TABLE IF EXISTS DH_DATAITEM;
 
-DROP TABLE IF EXISTS DH_DATAPOOL;
+DROP TABLE IF EXISTS DH_DATAITEMUSAGE;
 
-DROP TABLE IF EXISTS DH_DATAPOOLUSAGE;
+DROP TABLE IF EXISTS DH_DENYUSER1;
 
-DROP TABLE IF EXISTS DH_DENYGROUP;
+DROP TABLE IF EXISTS DH_DENYUSER2;
 
-DROP TABLE IF EXISTS DH_DENYUSER;
+DROP TABLE IF EXISTS DH_DIMTABLE;
 
 DROP TABLE IF EXISTS DH_DOWNLOADLOG;
 
@@ -20,15 +18,19 @@ DROP TABLE IF EXISTS DH_EARN;
 
 DROP TABLE IF EXISTS DH_EARNACCOUNT;
 
-DROP TABLE IF EXISTS DH_ENTRYPOINT;
+DROP TABLE IF EXISTS DH_EXPLORE;
 
 DROP TABLE IF EXISTS DH_FIELD;
 
+DROP TABLE IF EXISTS DH_FOLLOW;
+
 DROP TABLE IF EXISTS DH_GROUP;
 
-DROP TABLE IF EXISTS DH_JOB;
+DROP TABLE IF EXISTS DH_GROUPMAP;
 
-DROP TABLE IF EXISTS DH_LOG;
+DROP TABLE IF EXISTS DH_MESSAGEFROM;
+
+DROP TABLE IF EXISTS DH_MESSAGETO;
 
 DROP TABLE IF EXISTS DH_ORDER;
 
@@ -36,31 +38,25 @@ DROP TABLE IF EXISTS DH_PAYACCOUNT;
 
 DROP TABLE IF EXISTS DH_PAYMENT;
 
-DROP TABLE IF EXISTS DH_PERMITGROUP;
+DROP TABLE IF EXISTS DH_PERMITUSER1;
 
-DROP TABLE IF EXISTS DH_PERMITTYPE;
-
-DROP TABLE IF EXISTS DH_PERMITUSER;
+DROP TABLE IF EXISTS DH_PERMITUSER2;
 
 DROP TABLE IF EXISTS DH_PRICEUNIT;
 
-DROP TABLE IF EXISTS DH_PULLLOG;
+DROP TABLE IF EXISTS DH_QUOTA;
+
+DROP TABLE IF EXISTS DH_QUOTAREMAIN;
 
 DROP TABLE IF EXISTS DH_REPOSITORY;
 
-DROP TABLE IF EXISTS DH_SUPPLYSTYLE;
+DROP TABLE IF EXISTS DH_REPOSITORYRANKLOG;
 
 DROP TABLE IF EXISTS DH_UPLOADLOG;
 
 DROP TABLE IF EXISTS DH_USER;
 
 DROP TABLE IF EXISTS DH_USERINFO;
-
-DROP TABLE IF EXISTS DH_USERLEVEL;
-
-DROP TABLE IF EXISTS DH_USERLIST;
-
-DROP TABLE IF EXISTS DH_USERSTATUS;
 
 /*==============================================================*/
 /* Table: DH_CHARGE                                             */
@@ -69,37 +65,29 @@ CREATE TABLE DH_CHARGE
 (
    ACCOUNT_ID           VARCHAR(64) NOT NULL COMMENT '账号',
    CURRENCY_TYPE        INT NOT NULL,
-   FEE_TYPE             CHAR(10) COMMENT '充值费用类型
+   FEE_TYPE             INT COMMENT '充值费用类型
             1-押金
             2-预存款
             3-信用度',
    PAYMENT              DECIMAL(10,3),
    OPTIME               DATETIME NOT NULL COMMENT '帐户变动日期',
-   USER_ID              INT
+   USER_ID              INT,
+   PRIMARY KEY (ACCOUNT_ID, CURRENCY_TYPE, OPTIME)
 );
 
 /*==============================================================*/
-/* Table: DH_COMPANY                                            */
+/* Table: DH_COMPANYINFO                                        */
 /*==============================================================*/
-CREATE TABLE DH_COMPANY
+CREATE TABLE DH_COMPANYINFO
 (
-   COMPANY_ID           INT NOT NULL,
-   COMPANY_NAME         VARCHAR(128),
-   CERTIFY1             VARCHAR(128) COMMENT '资质证明材料，上传照片存储的文件名',
-   CERTIFY2             VARCHAR(128) COMMENT '资质证明材料，上传照片存储的文件名',
-   所属行业                 CHAR(10),
-   性质                   CHAR(10),
-   规模                   CHAR(10)
-);
-
-/*==============================================================*/
-/* Table: DH_CURRENCY                                           */
-/*==============================================================*/
-CREATE TABLE DH_CURRENCY
-(
-   CURRENCY_TYPE        INT NOT NULL,
-   CURRENCY_NAME        VARCHAR(64) COMMENT '币种名称，如Q币、人民币、欧元',
-   COMMENT              VARCHAR(128)
+   USER_ID              INT NOT NULL,
+   COMPANY_NAME         VARCHAR(1024),
+   ADDRESS              VARCHAR(1024),
+   CERTIFY1             VARCHAR(1024) COMMENT '资质证明材料，上传照片存储的文件名',
+   CERTIFY2             VARCHAR(1024) COMMENT '资质证明材料，上传照片存储的文件名',
+   CONTACT_NAME         VARCHAR(64),
+   PHONE_NO             VARCHAR(16),
+   PRIMARY KEY (USER_ID)
 );
 
 /*==============================================================*/
@@ -110,70 +98,73 @@ CREATE TABLE DH_DATAITEM
    REPOSITORY_ID        INT,
    USER_ID              INT,
    DATAITEM_ID          INT NOT NULL,
-   DATAITEM_NAME        VARCHAR(128) COMMENT '表义的中文名字的
+   DATAITEM_NAME        VARCHAR(1024) COMMENT '表义的中文名字的
             在搜索结果页面上展示用',
-   TAG                  VARCHAR(128) COMMENT '用逗号分隔多个tag标记',
-   PERMIT_TYPE          INT COMMENT '1-私有，仅限有血缘关系的帐号使用
-            2-向所有用户开放
-            3-用户白名单可用
-            4-用户黑名单不可用
-            5-用户组白名单可用
-            6-用户组黑名单不可用',
+   ICO_NAME             VARCHAR(64) COMMENT '图标文件名',
+   PERMIT_TYPE          INT COMMENT '2-public,所有用户可见,但用户黑名单不可见
+            3-private,所有用户不可见,但白名单用户可见',
+   KEY_WORDS            VARCHAR(1024) COMMENT '用分号分隔多个关键字标记，用于搜索。之前字段名为tag，但tag用于上传数据的标记',
    SUPPLY_STYLE         INT COMMENT '实时单条；批量； 流',
    PRICEUNIT_TYPE       INT COMMENT '定价单位',
    PRICE                DECIMAL(12,3) COMMENT '定价',
    OPTIME               DATE COMMENT '初始化或修改时间',
-   REFRESH_TYPE         INT COMMENT '数据的刷新周期，缺省为日',
-   REFRESH_DATE         DATE COMMENT '最新数据日期，上传时更新',
-   FILE_TYPE            VARCHAR(64) COMMENT '文件格式',
-   SAMPLE_FILENAME      VARCHAR(64) COMMENT '样例数据',
-   PASSWORD             VARCHAR(64) COMMENT '查看宝藏的密码，存明码，admin查询提供给请求的用户，可临时查看',
-   COMMENT              VARCHAR(128)
+   DATA_FORMAT          INT COMMENT '数据格式，1-txt、2-xls、3-ppt、4-doc、...',
+   REFRESH_TYPE         INT COMMENT '数据的刷新周期，月、日、时、分、秒',
+   REFRESH_NUM          INT COMMENT '刷新周期refresh_type的个数',
+   META_FILENAME        VARCHAR(1024) COMMENT '新增字段用于数据项描述
+            存json格式较好，否则显示没有渲染',
+   SAMPLE_FILENAME      VARCHAR(1024) COMMENT '存放样例数据的文件名
+            文件内容可以是json格式，显示时可以根据特定的关键字在web上进行渲染',
+   COMMENT              VARCHAR(1024),
+   PRIMARY KEY (DATAITEM_ID)
 );
 
 /*==============================================================*/
-/* Table: DH_DATAPOOL                                           */
+/* Table: DH_DATAITEMUSAGE                                      */
 /*==============================================================*/
-CREATE TABLE DH_DATAPOOL
+CREATE TABLE DH_DATAITEMUSAGE
 (
-   DATAPOOL_ID          INT NOT NULL,
-   DATAPOOL_NAME        VARCHAR(64),
-   DATAPOOL_TYPE        INT,
-   LOCATION             VARCHAR(128) COMMENT '文件系统的安装点',
-   CONN                 VARCHAR(128) COMMENT '连接串信息',
-   OBJ_QUOTA            INT COMMENT '存放对象数限额',
-   SPACE_QUOTA          INT COMMENT '空间容量，限xGB',
-   OPTIME               DATETIME COMMENT '创建或更新日期'
-);
-
-/*==============================================================*/
-/* Table: DH_DATAPOOLUSAGE                                      */
-/*==============================================================*/
-CREATE TABLE DH_DATAPOOLUSAGE
-(
-   DATAPOOL_ID          INT NOT NULL,
-   DATA_NAME            VARCHAR(64) COMMENT 'Server中的对象名',
-   RAW_NAME             VARCHAR(128) COMMENT '本地存储名'
-);
-
-/*==============================================================*/
-/* Table: DH_DENYGROUP                                          */
-/*==============================================================*/
-CREATE TABLE DH_DENYGROUP
-(
-   GROUP_ID             INT NOT NULL,
-   REPOSITORY_ID        INT NOT NULL,
-   DATAITEM_ID          INT NOT NULL
-);
-
-/*==============================================================*/
-/* Table: DH_DENYUSER                                           */
-/*==============================================================*/
-CREATE TABLE DH_DENYUSER
-(
-   REPOSITORY_ID        INT NOT NULL,
    DATAITEM_ID          INT NOT NULL,
-   USER_ID              INT NOT NULL
+   DATAITEM_NAME        VARCHAR(1024) COMMENT '表义的中文名字的
+            在搜索结果页面上展示用',
+   VIEWS                INT COMMENT '查看次数',
+   FOLLOWS              INT COMMENT '关注人数',
+   DOWNLOADS            INT COMMENT '下载次数',
+   STARS                INT COMMENT '质量星级',
+   REFRESH_DATE         DATE COMMENT '最新数据日期，上传时更新',
+   USABILITY            INT,
+   PRIMARY KEY (DATAITEM_ID)
+);
+
+/*==============================================================*/
+/* Table: DH_DENYUSER1                                          */
+/*==============================================================*/
+CREATE TABLE DH_DENYUSER1
+(
+   REPOSITORY_ID        INT NOT NULL,
+   USER_ID              INT NOT NULL,
+   PRIMARY KEY (REPOSITORY_ID, USER_ID)
+);
+
+/*==============================================================*/
+/* Table: DH_DENYUSER2                                          */
+/*==============================================================*/
+CREATE TABLE DH_DENYUSER2
+(
+   DATAITEM_ID          INT NOT NULL,
+   USER_ID              INT NOT NULL,
+   PRIMARY KEY (DATAITEM_ID, USER_ID)
+);
+
+/*==============================================================*/
+/* Table: DH_DIMTABLE                                           */
+/*==============================================================*/
+CREATE TABLE DH_DIMTABLE
+(
+   FIELD_NAME           VARCHAR(64) NOT NULL,
+   ID                   INT NOT NULL,
+   NAME                 VARCHAR(64),
+   PRIMARY KEY (FIELD_NAME, ID)
 );
 
 /*==============================================================*/
@@ -182,9 +173,10 @@ CREATE TABLE DH_DENYUSER
 CREATE TABLE DH_DOWNLOADLOG
 (
    DATAITEM_ID          INT NOT NULL,
-   DATA_DATE            DATE NOT NULL,
+   TAG                  VARCHAR(64) NOT NULL,
    DOWN_USER            INT NOT NULL,
-   OP_TIME              DATETIME NOT NULL
+   OPTIME               DATETIME NOT NULL,
+   PRIMARY KEY (DATAITEM_ID, TAG, DOWN_USER, OPTIME)
 );
 
 /*==============================================================*/
@@ -196,7 +188,8 @@ CREATE TABLE DH_EARN
    YEAR                 INT NOT NULL,
    MONTH                INT NOT NULL,
    CURRENCY_TYPE        INT NOT NULL,
-   SHOULD_EARN          DECIMAL(10,3)
+   SHOULD_EARN          DECIMAL(10,3),
+   PRIMARY KEY (USER_ID, YEAR, MONTH, CURRENCY_TYPE)
 );
 
 /*==============================================================*/
@@ -208,25 +201,20 @@ CREATE TABLE DH_EARNACCOUNT
    CURRENCY_TYPE        INT NOT NULL,
    USER_ID              INT,
    EARN                 DECIMAL(10,3) COMMENT '信用度，',
-   OPTIME               DATETIME COMMENT '帐户变动日期'
+   OPTIME               DATETIME COMMENT '帐户变动日期',
+   PRIMARY KEY (ACCOUNT_ID, CURRENCY_TYPE)
 );
 
 /*==============================================================*/
-/* Table: DH_ENTRYPOINT                                         */
+/* Table: DH_EXPLORE                                            */
 /*==============================================================*/
-CREATE TABLE DH_ENTRYPOINT
+CREATE TABLE DH_EXPLORE
 (
-   ENTRYPOINT_ID        INT NOT NULL,
-   ENTRYPOINT_NAME      VARCHAR(64),
-   PROTOCAL             INT,
-   MODEL                INT,
-   INNER_IP             VARCHAR(64),
-   IP                   INT,
-   OUTER_IP             VARCHAR(64),
-   OUTER_PORT           INT,
-   STATUS               INT,
-   OPTIME               DATETIME,
-   COMMENT              VARCHAR(128)
+   EXPLORE_ID           INT NOT NULL,
+   EXPLORE_NAME         VARCHAR(64) NOT NULL COMMENT '1-终端、时空、交通信息、...
+            2-txt、xls、pdf、...
+            3-...',
+   PRIMARY KEY (EXPLORE_ID)
 );
 
 /*==============================================================*/
@@ -240,7 +228,19 @@ CREATE TABLE DH_FIELD
    FIELD_NAME           VARCHAR(64) COMMENT '数据项名称，在搜索结果页面上展示',
    PRIMARY_KEY          INT COMMENT '是否是原表中的主键，是数据建立链接的id',
    FIELD_DATATYPE       INT COMMENT '数据项的数据类型',
-   FIELD_DATALENGTH     INT COMMENT '数据项的长度'
+   FIELD_DATALENGTH     INT COMMENT '数据项的长度',
+   COMMENT              VARCHAR(1024),
+   PRIMARY KEY (DATAITEM_ID, FIELD_ID)
+);
+
+/*==============================================================*/
+/* Table: DH_FOLLOW                                             */
+/*==============================================================*/
+CREATE TABLE DH_FOLLOW
+(
+   DATAITEM_ID          INT NOT NULL,
+   USER_ID              INT NOT NULL,
+   PRIMARY KEY (DATAITEM_ID, USER_ID)
 );
 
 /*==============================================================*/
@@ -250,34 +250,49 @@ CREATE TABLE DH_GROUP
 (
    GROUP_ID             INT NOT NULL,
    GROUP_NAME           VARCHAR(64),
-   CREATE_USER          INT,
+   CREATOR              INT,
+   GROUP_QUOTA          INT COMMENT '协作组人数配额
+            从creator用户在SellQuota表超的相应字段抄过来',
+   USER_NUM             INT COMMENT '协作的用户总数，取自创建组用户的group_quota',
    OPTIME               DATETIME,
-   COMMENT              VARCHAR(128)
+   COMMENT              VARCHAR(1024),
+   PRIMARY KEY (GROUP_ID)
 );
 
 /*==============================================================*/
-/* Table: DH_JOB                                                */
+/* Table: DH_GROUPMAP                                           */
 /*==============================================================*/
-CREATE TABLE DH_JOB
+CREATE TABLE DH_GROUPMAP
 (
-   JOB_ID               INT NOT NULL,
-   JOB_NAME             VARCHAR(64),
-   TYPE                 INT,
-   STATUS               INT,
-   START_TIME           DATETIME,
-   END_TIME             DATETIME,
-   COMMENT              VARCHAR(128)
-);
-
-/*==============================================================*/
-/* Table: DH_LOG                                                */
-/*==============================================================*/
-CREATE TABLE DH_LOG
-(
+   GROUP_ID             INT NOT NULL,
    USER_ID              INT NOT NULL,
-   INTERFACE            VARCHAR(64) NOT NULL,
-   PARAMETER            VARCHAR(128) NOT NULL,
-   OPTIME               DATETIME NOT NULL COMMENT '定义或修改时间'
+   PRIMARY KEY (USER_ID, GROUP_ID)
+);
+
+/*==============================================================*/
+/* Table: DH_MESSAGEFROM                                        */
+/*==============================================================*/
+CREATE TABLE DH_MESSAGEFROM
+(
+   MESSAGE_ID           INT NOT NULL,
+   USER_ID              INT NOT NULL,
+   MESSAGE              VARCHAR(1024) COMMENT 'json格式的消息，记录涉及的数据对象、内容',
+   CREATE_TIME          DATETIME NOT NULL,
+   PRIMARY KEY (MESSAGE_ID)
+);
+
+/*==============================================================*/
+/* Table: DH_MESSAGETO                                          */
+/*==============================================================*/
+CREATE TABLE DH_MESSAGETO
+(
+   MESSAGE_ID           INT NOT NULL,
+   USER_ID              INT NOT NULL COMMENT '消息的接收者，拥有者',
+   STATUS               INT COMMENT '1-创建
+            2-已读
+            7-删除',
+   OPTIME               DATETIME NOT NULL,
+   PRIMARY KEY (MESSAGE_ID)
 );
 
 /*==============================================================*/
@@ -300,7 +315,8 @@ CREATE TABLE DH_ORDER
             8-双方确认
             公开数据、价格为0数据、未议价订单均自动确认',
    OPTIME               DATETIME COMMENT '申请日期、状态变更日期',
-   COMMENT              VARCHAR(128)
+   COMMENT              VARCHAR(1024),
+   PRIMARY KEY (ORDER_ID)
 );
 
 /*==============================================================*/
@@ -309,12 +325,13 @@ CREATE TABLE DH_ORDER
 CREATE TABLE DH_PAYACCOUNT
 (
    ACCOUNT_ID           INT NOT NULL COMMENT '账号',
-   CURRENCY_TYPE        INT,
+   CURRENCY_TYPE        INT NOT NULL,
    USER_ID              INT,
    DEPOSIT              DECIMAL(10,3) COMMENT '押金',
    PREPAY               DECIMAL(10,3) COMMENT '预付款',
    CREDIT               DECIMAL(10,3) COMMENT '信用度，',
-   OPTIME               DATETIME COMMENT '帐户变动日期'
+   OPTIME               DATETIME COMMENT '帐户变动日期',
+   PRIMARY KEY (ACCOUNT_ID)
 );
 
 /*==============================================================*/
@@ -326,36 +343,28 @@ CREATE TABLE DH_PAYMENT
    OPTIME               DATETIME NOT NULL COMMENT '定义或修改时间',
    ACCOUNT_ID           VARCHAR(64) COMMENT '账号',
    PAYMENT              DECIMAL(10,3),
-   CREDIT_PAY           DECIMAL(10,3)
+   CREDIT_PAY           DECIMAL(10,3),
+   PRIMARY KEY (ORDER_ID, OPTIME)
 );
 
 /*==============================================================*/
-/* Table: DH_PERMITGROUP                                        */
+/* Table: DH_PERMITUSER1                                        */
 /*==============================================================*/
-CREATE TABLE DH_PERMITGROUP
-(
-   GROUP_ID             INT NOT NULL,
-   REPOSITORY_ID        INT NOT NULL,
-   DATAITEM_ID          INT NOT NULL
-);
-
-/*==============================================================*/
-/* Table: DH_PERMITTYPE                                         */
-/*==============================================================*/
-CREATE TABLE DH_PERMITTYPE
-(
-   PERMIT_TYPE          INT NOT NULL,
-   PERMIT_NAME          VARCHAR(64) NOT NULL
-);
-
-/*==============================================================*/
-/* Table: DH_PERMITUSER                                         */
-/*==============================================================*/
-CREATE TABLE DH_PERMITUSER
+CREATE TABLE DH_PERMITUSER1
 (
    REPOSITORY_ID        INT NOT NULL,
-   DATAITEM_ID          INT NOT NULL,
-   USER_ID              INT NOT NULL
+   USER_ID              INT NOT NULL,
+   PRIMARY KEY (REPOSITORY_ID, USER_ID)
+);
+
+/*==============================================================*/
+/* Table: DH_PERMITUSER2                                        */
+/*==============================================================*/
+CREATE TABLE DH_PERMITUSER2
+(
+   REPOSITORY_ID        INT NOT NULL,
+   USER_ID              INT NOT NULL,
+   PRIMARY KEY (REPOSITORY_ID, USER_ID)
 );
 
 /*==============================================================*/
@@ -365,19 +374,37 @@ CREATE TABLE DH_PRICEUNIT
 (
    PRICEUNIT_TYPE       INT NOT NULL COMMENT '条、百条、千条
             字节、千字节、兆字节',
-   CURRENCY_TYPE        INT,
-   PRICEUNIT_NAME       VARCHAR(64)
+   CURRENCY_TYPE        INT NOT NULL,
+   PRICEUNIT_NAME       VARCHAR(64),
+   PRIMARY KEY (PRICEUNIT_TYPE)
 );
 
 /*==============================================================*/
-/* Table: DH_PULLLOG                                            */
+/* Table: DH_QUOTA                                              */
 /*==============================================================*/
-CREATE TABLE DH_PULLLOG
+CREATE TABLE DH_QUOTA
 (
-   DATA_ID              INT NOT NULL,
-   DATA_NAME            VARCHAR(64),
-   OPTIME               DATETIME,
-   AMOUNT               INT
+   SELL_LEVEL           INT NOT NULL,
+   REPOSITORY_QUOTA     INT NOT NULL COMMENT '创建repository个数',
+   DATAITEM_QUOTA       INT NOT NULL COMMENT '创建dataitem个数',
+   TAG_QUOTA            INT NOT NULL,
+   GROUP_QUOTA          INT COMMENT '协作组人数配额',
+   SPACE_QUOTA          INT NOT NULL COMMENT '托管区空间配额，单位GB',
+   PRIMARY KEY (SELL_LEVEL)
+);
+
+/*==============================================================*/
+/* Table: DH_QUOTAREMAIN                                        */
+/*==============================================================*/
+CREATE TABLE DH_QUOTAREMAIN
+(
+   USER_ID              INT NOT NULL,
+   REPOSITORY_QUOTA     INT NOT NULL COMMENT '创建repository个数',
+   DATAITEM_QUOTA       INT NOT NULL COMMENT '创建dataitem个数',
+   TAG_QUOTA            INT,
+   GROUP_QUOTA          INT,
+   SPACE_QUOTA          INT COMMENT '托管区空间配额，单位GB',
+   PRIMARY KEY (USER_ID)
 );
 
 /*==============================================================*/
@@ -388,21 +415,32 @@ CREATE TABLE DH_REPOSITORY
    REPOSITORY_ID        INT NOT NULL,
    REPOSITORY_NAME      VARCHAR(64) COMMENT '数据提供者起的名字，对消费者有吸引力即可',
    USER_ID              INT,
-   PERMIT_TYPE          INT COMMENT '1-私有，仅限有血缘关系的帐号可见
-            2-所有用户可见
-            3-用户白名单可见
-            4-用户黑名单不可见
-            5-用户组白名单可见
-            6-用户组黑名单不可见'
+   PERMIT_TYPE          INT COMMENT '2-public,所有用户可见,但用户黑名单不可见
+            3-private,所有用户不可见,但白名单用户可见',
+   ARRANG_TYPE          INT COMMENT '1-申请托管
+            2-可以托管(使用上传功能,将文件上传到托管区）
+            ',
+   COMMENT              VARCHAR(1024) COMMENT '说明',
+   RANK                 INT COMMENT '排名',
+   STATUS               INT COMMENT '上升、下降标识
+            1-上升
+            2-下降',
+   DATAITEMS            INT COMMENT '数据项个数',
+   TAGS                 INT COMMENT '累计上传的tag个数',
+   STARS                INT COMMENT '质量星级',
+   OPTIME               DATETIME COMMENT '最新上传tag的日期',
+   PRIMARY KEY (REPOSITORY_ID)
 );
 
 /*==============================================================*/
-/* Table: DH_SUPPLYSTYLE                                        */
+/* Table: DH_REPOSITORYRANKLOG                                  */
 /*==============================================================*/
-CREATE TABLE DH_SUPPLYSTYLE
+CREATE TABLE DH_REPOSITORYRANKLOG
 (
-   SUPPLY_STYLE         INT NOT NULL,
-   SUPPLY_NAME          VARCHAR(64) NOT NULL
+   REPOSITORY_ID        INT NOT NULL,
+   RANK                 INT COMMENT '查看次数',
+   OPTIME               DATETIME NOT NULL,
+   PRIMARY KEY (REPOSITORY_ID)
 );
 
 /*==============================================================*/
@@ -411,7 +449,10 @@ CREATE TABLE DH_SUPPLYSTYLE
 CREATE TABLE DH_UPLOADLOG
 (
    DATAITEM_ID          INT NOT NULL,
-   DATA_DATE            DATE NOT NULL
+   TAG                  VARCHAR(64) NOT NULL COMMENT '标识数据的日期等，不可以重复',
+   FILENAME             VARCHAR(1024) COMMENT '在文件系统上存储时，存tag_filename',
+   OPTIME               DATETIME NOT NULL,
+   PRIMARY KEY (DATAITEM_ID, TAG)
 );
 
 /*==============================================================*/
@@ -420,16 +461,15 @@ CREATE TABLE DH_UPLOADLOG
 CREATE TABLE DH_USER
 (
    USER_ID              INT NOT NULL,
-   USER_LEVEL           INT COMMENT '1-组册用户
-            2-认证用户（核定了资质）
-            3-授权用户（有押金）',
-   COMPANY_ID           BIGINT,
-   LOGIN_NAME           VARCHAR(64) COMMENT '登录用户名',
-   LOGIN_PASSWD         VARCHAR(128) COMMENT '密码，需密文存储',
-   PHONE_NO             VARCHAR(64),
-   EMAIL                VARCHAR(128),
-   USER_STATUS          INT COMMENT '标记用户帐户状态，-1阻止登录',
-   CLONE_USER           INT
+   USER_STATUS          INT NOT NULL,
+   USER_TYPE            INT COMMENT '1-个人；2-企业',
+   USER_NAME            VARCHAR(64) COMMENT '登录用户名',
+   NICK_NAME            VARCHAR(1024),
+   LOGIN_NAME           VARCHAR(64),
+   LOGIN_PASSWD         VARCHAR(1024) COMMENT '密码，需密文存储',
+   SUMMARY              VARCHAR(1024),
+   OP_TIME              TIMESTAMP,
+   PRIMARY KEY (USER_ID)
 );
 
 /*==============================================================*/
@@ -437,81 +477,122 @@ CREATE TABLE DH_USER
 /*==============================================================*/
 CREATE TABLE DH_USERINFO
 (
-   USER_ID              INT,
-   ID                   CHAR(10),
-   兴趣                   CHAR(10)
+   USER_ID              INT NOT NULL,
+   ID                   CHAR(18) COMMENT '身份证号',
+   NAME                 VARCHAR(64) COMMENT '姓名',
+   PHONE_NO             VARCHAR(16),
+   PRIMARY KEY (USER_ID)
 );
 
-/*==============================================================*/
-/* Table: DH_USERLEVEL                                          */
-/*==============================================================*/
-CREATE TABLE DH_USERLEVEL
-(
-   USER_LEVEL           INT NOT NULL,
-   LEVEL_NAME           VARCHAR(64)
-);
+#SET @@CHARACTER_SET_SERVER='utf8'; 
 
-/*==============================================================*/
-/* Table: DH_USERLIST                                           */
-/*==============================================================*/
-CREATE TABLE DH_USERLIST
-(
-   GROUP_ID             INT NOT NULL,
-   USER_ID              INT NOT NULL
-);
+INSERT INTO DH_USER VALUES ('1001', '2', '1', '何鸿凌','何鸿凌', 'hehl@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1002', '2', '1',  '王军', '王军', 'wangjun15@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1003', '2', '1', '龚静','龚静', 'gongjing5@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1004', '2', '1',  '曹润月','曹润月', 'caory@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1005', '2', '1', '程冠凯','程冠凯', 'chenggk@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1006', '2', '1',  '宋亮','宋亮', 'songliang@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1007', '2', '1',  '贺晓童','贺晓童', 'hext3@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1008', '2', '1', '罗振苏','罗振苏', 'luozs@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1009', '2', '1',  '沈道峰','沈道峰', 'shendf@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1010', '2', '1', '王峥','王峥', 'wangzheng3@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1011', '2', '1',  '叶鹏','叶鹏', 'yepeng@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1012', '2', '1', '孟静','孟静', 'mengjing@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1013', '2', '1', '刘杰','刘杰', 'liujie15@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1014', '2', '1',  '王迪','王迪', 'wangdi6@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1015', '2', '1',  '刘雪莹','刘雪莹', 'liuxy10@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1016', '2', '1', '刘旭','刘旭', 'liuxu@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1017', '2', '1',  '潘新元','潘新元', 'panxy3@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1018', '2', '1',  '柴宗山','柴宗山', 'chaizs@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1019', '2', '1',  '袁伟明','袁伟明', 'yuanwm@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1020', '2', '1', '张维意','张维意', 'zhangwy@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1021', '2', '1', '程康健','程康健', 'chengkj@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1022', '2', '1',  'admin','admin', 'datahub@asiainfo.com', '46c5fc8491b9632401a207c7ab04eb0a', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1023', '2', '1', '数易安','数易安', '13808305511@139.com', 'bde202e8ab686fec2a848e15b61744cb', '','2015-11-12');
 
-/*==============================================================*/
-/* Table: DH_USERSTATUS                                         */
-/*==============================================================*/
-CREATE TABLE DH_USERSTATUS
-(
-   USER_STATUS          INT NOT NULL,
-   STATUS_NAME          VARCHAR(64)
-);
 
-SET @@CHARACTER_SET_SERVER='utf8'; 
 
-INSERT INTO DH_USER VALUES ('1', '5', NULL, 'admin', '21232f297a57a5a743894a0e4a801fc3', '82166436', 'gongjing5@asiainfo.com', NULL, '1');
-INSERT INTO DH_USER VALUES ('1001', '3', NULL, 'zhhs888888', '5dc828c0e0fc5ff0e94dec595251259b', '13609251885', 'gongjing5@asiainfo.com', NULL, '1');
-INSERT INTO DH_USER VALUES ('1002', '3', NULL, 'sya666666', 'bde202e8ab686fec2a848e15b61744cb', '13808305511', 'gongjing5@asiainfo.com', NULL, '1');
-INSERT INTO DH_USER VALUES ('2001', '5', NULL, 'fenghw', '86edd721bd0c5533aef7856bd0eb96ed', NULL, NULL, NULL, '1');
+INSERT INTO DH_REPOSITORY VALUES ('10', '位置信息大全', '1002', '2', '1', '','1','1','3','0','5',NULL);
+INSERT INTO DH_REPOSITORY VALUES ('20', '公共数据', '2002', '2', '1', '最好的数据，谁都可以用哟','2','2','0','0','1',NULL);
 
-INSERT INTO DH_REPOSITORY VALUES ('10', '手机信息大全', '1002', '2');
-INSERT INTO DH_DATAITEM VALUES ('10', '1002', '1010', '手机开通', '手机,iphone', '2', '1', '1', '1.000', '2015-08-01', '1', '2015-07-31', 'RAR压缩包', 'terminal.del', '888888', '手机开通情况统计');
-INSERT INTO DH_FIELD VALUES ('1010', '1', 'phone_id', '手机型号', '1', '1', NULL);
-INSERT INTO DH_FIELD VALUES ('1010', '2', 'phone_brand', '手机品牌', '0', '2', '16');
-INSERT INTO DH_FIELD VALUES ('1010', '3', 'company', '出品厂商', '0', '2', '16');
-INSERT INTO DH_FIELD VALUES ('1010', '4', 'price', '定价', '0', '3', NULL);
-INSERT INTO DH_FIELD VALUES ('1010', '5', 'first_date', '入网日期', '0', '4', NULL);
-INSERT INTO DH_FIELD VALUES ('1010', '6', 'amount', '数量', '0', '1', NULL);
+INSERT INTO DH_DATAITEM VALUES ('10', '1004', '1011', '全国在网（新增）终端', 'terminal.png', '2', '手机;iphone', '3', '1', '0.000', '2015-08-01', '2', '1', '1','meta_terminal.doc', 'sample_terminal.doc', '对终端使用情况、变化情况进行了全方面的分析。包括分品牌统计市场存量、新增、机型、数量、换机等情况。终端与ARPU、DOU、网龄的映射关系。终端的APP安装情况等。');
+INSERT INTO DH_DATAITEM VALUES ('10', '1004', '1012', '全国终端换机分析', 'terminal.png', '2', '手机;iphone', '3', '1', '0.000', '2015-08-01', '2', '1', '1','meta_terminal2.doc', 'sample_terminal2.doc', '对终端使用情况、变化情况进行了全方面的分析。包括分品牌统计市场存量、新增、机型、数量、换机等情况。终端与ARPU、DOU、网龄的映射关系。终端的APP安装情况等。');
+INSERT INTO DH_DATAITEM VALUES ('10', '1004', '1013', 'APP使用情况', 'Apps.png', '2','app;应用', '3', '1', '0.000', '2015-08-01', '2', '1','1', 'meta_apps.doc', 'sample_apps.doc', '统计全国智能终端APP的使用情况。按天统计用户APP的使用情况，包括APP类型、APP名称、独立访客访问次数、访问总次数等信息。');
+INSERT INTO DH_DATAITEM VALUES ('10', '1004', '1014', '电商访问数据', 'electronic_business.png', '2','电商;网店', '3', '1', '0.000', '2015-08-01', '2', '1', '1','meta_electronic_business.doc', 'sample_electronic_business.doc', '统计全国智能终端访问电商的情况。以天为统计周期，内容包括访问方式、访问对象、访问商品ID，独立访客访访问量、访问总量、购买数、收藏数。');
+INSERT INTO DH_DATAITEM VALUES ('10', '1004', '1015', '股票访问次数', 'stock.png', '2','股票;stock', '3', '1', '0.000', '2015-08-01', '2', '1', '1','meta_stock.doc', 'sample_stock.doc', '统计全国智能终端访问股票的情况。以天为统计周期，包括访问的股票名称、股票代码、浏览次数、WEB浏览次数、搜索次数等。');
+INSERT INTO DH_DATAITEM VALUES ('10', '1004', '1016', '搜索热词', 'search_hot.png', '2','搜索;search;热词', '3', '1', '0.000', '2015-08-01', '2', '1', '1','meta_search_hot.doc', 'sample_search_hot.doc', '汇总全国移动端搜索数据。以天为周期，内容包扩用户使用的搜索引擎，搜索关键词，独立访客访问量、访问总量等。');
 
-INSERT INTO DH_UPLOADLOG VALUES ('1010', '2015-09-05');
-INSERT INTO DH_UPLOADLOG VALUES ('1010', '2015-08-05');
-INSERT INTO DH_UPLOADLOG VALUES ('1010', '2015-07-05');
-INSERT INTO DH_UPLOADLOG VALUES ('1010', '2015-06-05');
-INSERT INTO DH_DOWNLOADLOG VALUES ('1010', '2015-08-05', '1001', '2015-08-06 17:34:27');
-INSERT INTO DH_DOWNLOADLOG VALUES ('1010', '2015-07-05', '1001', '2015-07-06 17:34:59');
-INSERT INTO DH_DOWNLOADLOG VALUES ('1010', '2015-06-05', '1001', '2015-06-06 17:35:29');
 
-INSERT INTO DH_USERLEVEL VALUES ('1', '注册用户');
-INSERT INTO DH_USERLEVEL VALUES ('2', '认证用户');
-INSERT INTO DH_USERLEVEL VALUES ('3', 'VIP用户');
 
-INSERT INTO DH_USERSTATUS VALUES ('1', '正常');
-INSERT INTO DH_USERSTATUS VALUES ('2', '封锁');
-INSERT INTO DH_USERSTATUS VALUES ('3', '注销');
+INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2001', '银联数据', 'unionpay.png', '2', '', '3', '1', '0.000', '2015-08-01', '1', '1','1', 'meta_unionpay.doc', 'sample_unionpay.doc', '通过数十个维度的特征指标，对用户群体进行消费特征分析。包含42亿张银联卡，8亿银联持卡人，1200万家境内联网商户、3000万家境外联网商户、6000万笔日均交易流水。');
+INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2002', '工商数据', 'industry_commerce.png', '2', '', '3', '1', '0.000', '2015-08-01', '1', '1','1', 'meta_commerce.doc', 'sample_commerce.doc', '全国企业、事业、机关、社会团体、民办非企业及其他合法组织的工商数据。共覆盖1800万家单位，覆盖所有省、市、县、乡镇，每日动态更新数据。为校验用户身份提供有效依据。');
+INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2003', '社交数据', 'social.png', '2', '', '3', '1', '0.000', '2015-08-01', '1', '1','1', 'meta_social.doc', 'sample_social.doc', '互联用户的社交数据。包括论坛、贴吧、微博、微信公众号等主流社交网络的用户信息、用户评论、转发，用户关系等数据。可作为品牌效果评价，也可以作为产品改进或者营销创意的依据。');
+INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2004', '公交数据', 'bus.png', '2', '', '3', '1', '0.000', '2015-08-01', '1', '1','1', 'meta_bus.doc', 'sample_bus.doc', '基于海量车辆运行产生的GPS数据。包含自动分析出当前准确的车辆行驶线路、车站位置、线路站序、车-线对应关系、首末班发车，发车间隔、甩站、滞站、行车速度。');
+INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2005', '气象数据', 'weather.png', '2', '', '3', '1', '0.000', '2015-08-01', '1', '1', '1','meta_weather.doc', 'sample_weather.doc', '全国天气监测数据。包括风力风向、每日平均温度、每日最高最低温度、降水量、相对湿度、气压，共覆盖2000+国家级地面观测站、5W+区域自动站的实时监测数据。');
+INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2006', 'GIS地图', 'GIS_map.png', '2', '', '3', '1', '0.000', '2015-08-01', '1', '1', '1','meta_gis.doc', 'sample_gis.doc', '全国基础地图数据。包括不同比例，如1:500、1:1000、1:2000、1:5000、1:10000、1:50000等图例，包括多种数据模型，如多维模型数据、360全景数据、遥感影像数据、标准地址数据。');
+INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2007', '农业数据', 'farming.png', '2', '', '3', '1', '0.000', '2015-08-01', '1', '1', '1','meta_farming.doc', 'sample_farming.doc', '全国农业数据信息。包括宏观经济景气数据、农村统计数据、渔业统计数据、畜牧业统计数据、林业统计数据、粮食专题数据、农产品贸易数据；蔬果、茶叶、中药材、水产品价格监测。');
+INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2008', '线上电商零售数据', 'sell.png', '2', '', '3', '1', '0.000', '2015-08-01', '1', '1','1', 'meta_sell.doc', 'sample_sell.doc', '主流电商零售数据。包括京东、天猫、亚马逊、1号店、当当网、我买网、国美、苏宁、聚美网、乐峰网、易迅等线上电商商品品类、价格、销售量、关联销售、促销活动等信息。');
+INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2009', '线上医药数据', 'medicine.png', '2', '', '3', '1', '0.000', '2015-08-01', '1', '1','1', 'meta_medicine.doc', 'sample_medicine.doc', '主流线上医药数据。包括壹药网、康爱、老百姓大药房、好药师、金象网等网站药品类目、价格、销售、促销活动等信息。');
+INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2010', '影视数据', 'film.png', '2', '', '3', '1', '0.000', '2015-08-01', '1', '1', '1','meta_film.doc', 'sample_film.doc', '主流视频网站的影视数据。包括优酷、爱奇艺、搜狐视频、腾讯视频、乐视网、豆瓣、1905影视内容、浏览量、客户评论、热度，相关艺人的关注度、影视库，好评度等信息。');
+INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2011', '旅游信息', 'trip.png', '2', '', '3', '1', '0.000', '2015-08-01', '1', '1', '1','meta_trip.doc', 'sample_trip.doc', '主流在线旅游网站的旅游产品信息。包括携程、去哪儿、途牛等网站旅游产品、旅游路线、旅游产品关注度、产品价格、攻略、客户问题、营销活动等信息。');
+INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2013', 'APP数据', 'app.png', '2', '', '3', '1', '0.000', '2015-08-01', '1', '1', '1','meta_app.doc', 'sample_app.doc', '全国安卓系统APP情况。包括App应用的留存用户、新增用户、在线用户、推送数据、用户点击行为等核心数据。');
+INSERT INTO DH_DATAITEM VALUES ('20', '2002', '2014', '新浪微博数据', 'sina_weibo.png', '2', '', '3', '1', '0.000', '2015-08-01', '1', '1','1', 'meta_weibo.doc', 'sample_weibo.doc', '新浪微博账号统计数据。包括7×24h全天候实时监测，账号分析、互动分析、大号分析、行业分析、粉丝分析等共计11个专业维度。微博营销情况，微博热门事件等事件分析。 ');
 
-INSERT INTO DH_CURRENCY VALUES ('1', '人民币', '中国银行发行的钞票');
-INSERT INTO DH_CURRENCY VALUES ('2', '美元', '山姆大叔的绿纸');
-INSERT INTO DH_CURRENCY VALUES ('3', 'Q币', '腾讯公司的虚拟币');
-INSERT INTO DH_CURRENCY VALUES ('4', '比特币', '一个神奇的币种');
+INSERT INTO DH_DATAITEMUSAGE(DATAITEM_ID,DATAITEM_NAME,VIEWS,FOLLOWS,DOWNLOADS,STARS,REFRESH_DATE,USABILITY)
+SELECT DATAITEM_ID,DATAITEM_NAME,100,0,0,1,NULL,1
+FROM DH_DATAITEM;
 
-INSERT INTO DH_PERMITTYPE VALUES ('1', '私有');
-INSERT INTO DH_PERMITTYPE VALUES ('2', '公有');
-INSERT INTO DH_PERMITTYPE VALUES ('3', '用户白名单可见');
-INSERT INTO DH_PERMITTYPE VALUES ('4', '用户黑名单不可见');
-INSERT INTO DH_PERMITTYPE VALUES ('5', '组白名单可见');
-INSERT INTO DH_PERMITTYPE VALUES ('6', '组黑名单不可见');
+INSERT INTO DH_FIELD VALUES ('1011', '1', 'phone_id', '手机型号', '1', '1', NULL,'');
+INSERT INTO DH_FIELD VALUES ('1011', '2', 'phone_brand', '品牌', '0', '2', '16','');
+INSERT INTO DH_FIELD VALUES ('1011', '3', 'company', '出品厂商', '0', '2', '16','');
+INSERT INTO DH_FIELD VALUES ('1011', '4', 'price', '定价', '0', '3', NULL,'');
+INSERT INTO DH_FIELD VALUES ('1011', '5', 'first_date', '入网日期', '0', '4', NULL,'');
+INSERT INTO DH_FIELD VALUES ('1011', '6', 'amount', '数量', '0', '1', NULL,'');
+
+
+INSERT INTO DH_DIMTABLE VALUES ('permit_type',2,'public');
+INSERT INTO DH_DIMTABLE VALUES ('permit_type',3,'private');
+INSERT INTO DH_DIMTABLE VALUES ('permit_type',4,'public+黑名单');
+INSERT INTO DH_DIMTABLE VALUES ('permit_type',5,'private+白名单');
+INSERT INTO DH_DIMTABLE VALUES ('arrange_type',1,'申请托管');
+INSERT INTO DH_DIMTABLE VALUES ('arrange_type',2,'可以托管');
+INSERT INTO DH_DIMTABLE VALUES ('supply_style',1,'单条查询');
+INSERT INTO DH_DIMTABLE VALUES ('supply_style',2,'流数据');
+INSERT INTO DH_DIMTABLE VALUES ('supply_style',3,'文件');
+INSERT INTO DH_DIMTABLE VALUES ('user_type',1,'企业');
+INSERT INTO DH_DIMTABLE VALUES ('user_type',2,'个人');
+INSERT INTO DH_DIMTABLE VALUES ('user_status',1,'注册用户');
+INSERT INTO DH_DIMTABLE VALUES ('user_status',2,'激活用户');
+INSERT INTO DH_DIMTABLE VALUES ('user_status',3,'认证用户');
+INSERT INTO DH_DIMTABLE VALUES ('user_status',4,'授权用户');
+INSERT INTO DH_DIMTABLE VALUES ('user_status',8,'帐号冻结');
+INSERT INTO DH_DIMTABLE VALUES ('user_status',7,'帐号销毁');
+INSERT INTO DH_DIMTABLE VALUES ('sell_level',1,'铜牌');
+INSERT INTO DH_DIMTABLE VALUES ('sell_level',3,'银牌');
+INSERT INTO DH_DIMTABLE VALUES ('sell_level',5,'金牌');
+INSERT INTO DH_DIMTABLE VALUES ('arrang_type',1,'申请托管');
+INSERT INTO DH_DIMTABLE VALUES ('arrang_type',2,'可以托管');
+INSERT INTO DH_DIMTABLE VALUES ('rank_status',1,'上升');
+INSERT INTO DH_DIMTABLE VALUES ('rank_status',7,'下降');
+INSERT INTO DH_DIMTABLE VALUES ('data_format',1,'txt');
+INSERT INTO DH_DIMTABLE VALUES ('data_format',2,'pdf');
+INSERT INTO DH_DIMTABLE VALUES ('data_format',3,'xls');
+INSERT INTO DH_DIMTABLE VALUES ('data_format',4,'doc');
+INSERT INTO DH_DIMTABLE VALUES ('data_format',5,'ppt');
+INSERT INTO DH_DIMTABLE VALUES ('data_format',6,'csv');
+INSERT INTO DH_DIMTABLE VALUES ('refresh_type',1,'月');
+INSERT INTO DH_DIMTABLE VALUES ('refresh_type',2,'日');
+INSERT INTO DH_DIMTABLE VALUES ('refresh_type',3,'时');
+INSERT INTO DH_DIMTABLE VALUES ('refresh_type',4,'分');
+INSERT INTO DH_DIMTABLE VALUES ('refresh_type',5,'秒');
+INSERT INTO DH_DIMTABLE VALUES ('currency_type',1,'人民币');
+INSERT INTO DH_DIMTABLE VALUES ('currency_type',2,'美元');
+INSERT INTO DH_DIMTABLE VALUES ('currency_type',3,'Q币');
+INSERT INTO DH_DIMTABLE VALUES ('currency_type',4,'比特币');
+
+INSERT INTO DH_EXPLORE VALUES ('1', '终端信息');
+INSERT INTO DH_EXPLORE VALUES ('2', '时空信息');
+INSERT INTO DH_EXPLORE VALUES ('3', '交通信息');
 
 
 INSERT INTO DH_PRICEUNIT VALUES ('10', '1', '单条');
@@ -519,19 +600,16 @@ INSERT INTO DH_PRICEUNIT VALUES ('11', '1', '1千条');
 INSERT INTO DH_PRICEUNIT VALUES ('20', '1', '1个周期全部数据');
 INSERT INTO DH_PRICEUNIT VALUES ('30', '1', '1小时流量');
 
-INSERT INTO DH_SUPPLYSTYLE VALUES ('1', '批量');
-INSERT INTO DH_SUPPLYSTYLE VALUES ('2', '小批');
-INSERT INTO DH_SUPPLYSTYLE VALUES ('3', '流数据');
-INSERT INTO DH_SUPPLYSTYLE VALUES ('4', '单条查询');
+INSERT INTO DH_QUOTA VALUES ('1', '5', '25', '100', '0', '100');
+INSERT INTO DH_QUOTA VALUES ('2', '20', '100', '2000', '10', '2048');
+INSERT INTO DH_QUOTA VALUES ('3', '100', '500', '10000', '20', '4096');
+
+INSERT INTO DH_QUOTAREMAIN VALUES ('1002', '4', '24', '100', '0', '100');
+INSERT INTO DH_QUOTAREMAIN VALUES ('1004', '4', '24', '100', '0', '100');
 COMMIT;
 
 
 ## DH_USER，DH_REPOSITORY 设置主键、自增
-ALTER TABLE DH_USER MODIFY USER_ID INT UNSIGNED NOT NULL AUTO_INCREMENT,
-ADD PRIMARY KEY(USER_ID);
+ALTER TABLE DH_USER MODIFY USER_ID INT UNSIGNED NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE DH_REPOSITORY MODIFY REPOSITORY_ID INT UNSIGNED NOT NULL AUTO_INCREMENT,
-ADD PRIMARY KEY(REPOSITORY_ID);
-
-SELECT * FROM DH_DATAITEM WHERE DATAITEM_NAME="手机开通";
-;
+ALTER TABLE DH_REPOSITORY MODIFY REPOSITORY_ID INT UNSIGNED NOT NULL AUTO_INCREMENT;
