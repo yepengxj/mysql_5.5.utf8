@@ -513,7 +513,8 @@ INSERT INTO DH_USER VALUES ('1022', '2', '1',  'admin','admin', 'datahub@asiainf
 INSERT INTO DH_USER VALUES ('1023', '2', '1', '数易安','数易安', '13808305511@139.com', 'bde202e8ab686fec2a848e15b61744cb', '数易安公司成立于2015年，主要从事数据分析和数据产品服务。','2015-11-12');
 INSERT INTO DH_USER VALUES ('1024', '2', '1', '亚信','亚信', 'yaxin@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '亚信是中国最大、全球领先的通信行业IT解决方案和服务提供商,致力于成为“产业互联网时代的领航者”,为实现让中国软件影响世界的目标而不断进取。','2015-11-18');
 INSERT INTO DH_USER VALUES ('1025', '2', '1', '华院数据技术（上海）有限公司','华院数据', 'huaysj@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '华院数据技术（上海）有限公司（以下简称“华院数据”—于2012年8月由华院分析和德盈数据合并），成立于2002年3月，是国内为数很少的以高水平的数据挖掘和数据分析为核心能力的专业服务公司。','2015-11-18');
-
+INSERT INTO DH_USER VALUES ('1026', '2', '1', '杭州亚信中亿科技有限公司','中亿', 'zhongyi@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '杭州亚信中亿科技有限公司（以下简称中亿）隶属亚信集团，秉承亚信22年专业服务精神，专业为广大客户提供征信服务。拥有优质的数据合作源，能提供多维度征信服务。','2015-11-19');
+INSERT INTO DH_USER VALUES ('1027', '2', '1', '方亮','方亮', 'fangliang@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
 
 INSERT INTO DH_REPOSITORY VALUES ('10', '位置信息大全', '1002', '2', '1', '','1','1','3','0','5',NULL);
 INSERT INTO DH_REPOSITORY VALUES ('20', '公共数据', '2002', '2', '1', '最好的数据，谁都可以用哟','2','2','0','0','1',NULL);
