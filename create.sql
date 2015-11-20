@@ -464,7 +464,7 @@ CREATE TABLE DH_USER
 (
    USER_ID              INT NOT NULL,
    USER_STATUS          INT NOT NULL,
-   USER_TYPE            INT COMMENT '1-个人；2-企业',
+   USER_TYPE            INT COMMENT '1-普通；2-管理员',
    USER_NAME            VARCHAR(64) COMMENT '登录用户名',
    NICK_NAME            VARCHAR(1024),
    LOGIN_NAME           VARCHAR(64),
@@ -509,7 +509,7 @@ INSERT INTO DH_USER VALUES ('1018', '2', '1',  '柴宗山','柴宗山', 'chaizs@
 INSERT INTO DH_USER VALUES ('1019', '2', '1',  '袁伟明','袁伟明', 'yuanwm@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
 INSERT INTO DH_USER VALUES ('1020', '2', '1', '张维意','张维意', 'zhangwy@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
 INSERT INTO DH_USER VALUES ('1021', '2', '1', '程康健','程康健', 'chengkj@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
-INSERT INTO DH_USER VALUES ('1022', '2', '1',  'admin','admin', 'datahub@asiainfo.com', '46c5fc8491b9632401a207c7ab04eb0a', '','2015-11-12');
+INSERT INTO DH_USER VALUES ('1022', '2', '2',  'admin','admin', 'datahub@asiainfo.com', '46c5fc8491b9632401a207c7ab04eb0a', '','2015-11-12');
 INSERT INTO DH_USER VALUES ('1023', '2', '1', '重庆市数易安信息技术有限公司','数易安', '13808305511@139.com', 'bde202e8ab686fec2a848e15b61744cb', '数易安公司成立于2015年，主要从事数据分析和数据产品服务。','2015-11-12');
 INSERT INTO DH_USER VALUES ('1024', '2', '1', '亚信','亚信', 'yaxin@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '亚信是中国最大、全球领先的通信行业IT解决方案和服务提供商,致力于成为“产业互联网时代的领航者”,为实现让中国软件影响世界的目标而不断进取。','2015-11-18');
 INSERT INTO DH_USER VALUES ('1025', '2', '1', '华院数据技术（上海）有限公司','华院数据', 'huaysj@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '华院数据技术（上海）有限公司（以下简称“华院数据”—于2012年8月由华院分析和德盈数据合并），成立于2002年3月，是国内为数很少的以高水平的数据挖掘和数据分析为核心能力的专业服务公司。','2015-11-18');
