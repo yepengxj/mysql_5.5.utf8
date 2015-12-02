@@ -551,6 +551,26 @@ INSERT INTO DH_USER VALUES ('1060', '2', '1', '公开竞赛数据','公开竞赛
 
 
 
+INSERT INTO DH_USER VALUES ('1071', '2', '1', '伍平','伍平', 'wuping3@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1072', '2', '1',  '郑明清', '郑明清', 'zhengmq@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1073', '2', '1', '张云翔','张云翔', 'zhangyx5@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1074', '2', '1',  '李明','李明', 'liming3@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1075', '2', '1', '华超杰','华超杰', 'huacj@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1076', '2', '1',  '张曼','张曼', 'zhangman3@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1077', '2', '1',  '华翔','华翔', 'huaxiang@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1078', '2', '1', '孙东远','孙东远', 'sundy@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1079', '2', '1',  '黄平','黄平', 'huangping@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1080', '2', '1', '罗伟','罗伟', 'luowei5@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1081', '2', '1',  '王力','王力', 'wangli20@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1082', '2', '1', '魏立夏','魏立夏', 'weilx@asialantao.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1083', '2', '1', '李铮','李铮', 'lizheng3@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1084', '2', '1',  '游泳','游泳', 'youyong@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1085', '2', '1',  '韦正云','韦正云', 'weizy@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1086', '2', '1', '刘仁杰','刘仁杰', 'liurj@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1087', '2', '1',  '唐炜','唐炜', 'tangwei@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1088', '2', '1',  '牛琳','牛琳', 'niulin@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1089', '2', '1',  '王珏华','王珏华', 'wangjh11@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1090', '2', '1', '金进','金进', 'jinjin@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
 
 
 
