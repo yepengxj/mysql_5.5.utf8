@@ -571,6 +571,7 @@ INSERT INTO DH_USER VALUES ('1087', '2', '1',  '唐炜','唐炜', 'tangwei@asiai
 INSERT INTO DH_USER VALUES ('1088', '2', '1',  '牛琳','牛琳', 'niulin@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
 INSERT INTO DH_USER VALUES ('1089', '2', '1',  '王珏华','王珏华', 'wangjh11@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
 INSERT INTO DH_USER VALUES ('1090', '2', '1', '金进','金进', 'jinjin@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1091', '2', '1', '刘泉','刘泉', 'liuquan2@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-03');
 
 
 
