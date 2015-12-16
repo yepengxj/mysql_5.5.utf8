@@ -572,7 +572,7 @@ INSERT INTO DH_USER VALUES ('1088', '2', '1',  '牛琳','牛琳', 'niulin@asiain
 INSERT INTO DH_USER VALUES ('1089', '2', '1',  '王珏华','王珏华', 'wangjh11@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
 INSERT INTO DH_USER VALUES ('1090', '2', '1', '金进','金进', 'jinjin@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
 INSERT INTO DH_USER VALUES ('1091', '2', '1', '刘泉','刘泉', 'liuquan2@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-03');
-
+INSERT INTO DH_USER VALUES ('1092', '2', '3', '无锡市政府数据服务网','无锡市政府数据服务网', 'datawuxi@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '无锡市政府数据服务网是无锡市政务部门数据公开的门户，为企业和个人开展政务信息资源的社会化开发利用提供数据支撑，推动信息资源增值服务业的发展以及相关数据分析与研究工作的开展。包括教育、公安、民政、人社、国土、建设、规划局等15个部门的100个数据包，涵盖了住房保障、婚姻登记、旅游名录、计划生育、土地出让、建设规划、用水用气、社会保障、文教事业等各类信息；同时还提供了无锡天地图链接以及26个手机APP应用软件供下载。','2015-12-15');
 
 
 
