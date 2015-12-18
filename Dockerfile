@@ -23,7 +23,7 @@ ENV MYSQL_VERSION 5.5.45
 
 # note: we're pulling the *.asc file from mysql.he.net instead of dev.mysql.com because the official mirror 404s that file for whatever reason - maybe it's at a different path?
 RUN apt-get update && apt-get install -y curl --no-install-recommends && rm -rf /var/lib/apt/lists/* \
-	&& curl -SL "http://dev.mysql.com/get/Downloads/MySQL-$MYSQL_MAJOR/mysql-$MYSQL_VERSION-linux2.6-x86_64.tar.gz" -o mysql.tar.gz \
+	&& curl -SL "https://s3.cn-north-1.amazonaws.com.cn/complier/mysql.tar.gz" -o mysql.tar.gz \
 	&& curl -SL "http://mysql.he.net/Downloads/MySQL-$MYSQL_MAJOR/mysql-$MYSQL_VERSION-linux2.6-x86_64.tar.gz.asc" -o mysql.tar.gz.asc \
 	&& apt-get purge -y --auto-remove curl \
 	#&& gpg --verify mysql.tar.gz.asc \
