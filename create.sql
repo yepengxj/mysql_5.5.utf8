@@ -551,6 +551,7 @@ INSERT INTO DH_USER VALUES ('1060', '2', '1', '公开竞赛数据','公开竞赛
 
 
 
+
 INSERT INTO DH_USER VALUES ('1071', '2', '1', '伍平','伍平', 'wuping3@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
 INSERT INTO DH_USER VALUES ('1072', '2', '1',  '郑明清', '郑明清', 'zhengmq@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
 INSERT INTO DH_USER VALUES ('1073', '2', '1', '张云翔','张云翔', 'zhangyx5@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
@@ -576,9 +577,9 @@ INSERT INTO DH_USER VALUES ('1092', '2', '3', '无锡市政府数据服务网','
 
 INSERT INTO DH_USER VALUES ('1093', '2', '3', '湛江市政府数据服务网','湛江市政府数据服务网', 'datazj@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '湛江市政府数据服务网于2012年12月对社会公开，目标是促进政府信息资源的开发利用，发挥政府信息资源在本市经济结构转型、现代服务业加快发展中的重要作用，满足公众和企业对政府信息的“知情权”和“使用权”，向社会提供政府信息资源和公共社会资源的浏览、查询、下载等基本数据服务，同时汇聚发布基于政府信息资源开发的应用程序等增值服务。 ','2015-12-22');
 INSERT INTO DH_USER VALUES ('1094', '2', '3', '薛雅升','薛雅升', 'xueyasheng1215@icloud.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-22');
-
-
-
+INSERT INTO DH_USER VALUES ('1095', '2', '1', '注册用户','注册用户', 'zhucce@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-23');
+INSERT INTO DH_USER VALUES ('1096', '2', '4', '金卡用户','金卡用户', 'jinka@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-23');
+INSERT INTO DH_USER VALUES ('1097', '2', '5', '钻石用户','钻石用户', 'zuanshi@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-23');
 
 
 
