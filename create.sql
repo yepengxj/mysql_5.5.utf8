@@ -580,6 +580,7 @@ INSERT INTO DH_USER VALUES ('1094', '2', '3', '薛雅升','薛雅升', 'xueyashe
 INSERT INTO DH_USER VALUES ('1095', '2', '1', '注册用户','注册用户', 'zhucce@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-23');
 INSERT INTO DH_USER VALUES ('1096', '2', '4', '金卡用户','金卡用户', 'jinka@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-23');
 INSERT INTO DH_USER VALUES ('1097', '2', '5', '钻石用户','钻石用户', 'zuanshi@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-23');
+INSERT INTO DH_USER VALUES ('1098', '2', '3', '长江大数据交易所','长江大数据交易所', 'houhai@cjbigdata.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-23');
 
 
 
