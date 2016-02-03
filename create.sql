@@ -581,13 +581,44 @@ INSERT INTO DH_USER VALUES ('1095', '2', '1', '注册用户','注册用户', 'zh
 INSERT INTO DH_USER VALUES ('1096', '2', '4', '金卡用户','金卡用户', 'jinka@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-23');
 INSERT INTO DH_USER VALUES ('1097', '2', '5', '钻石用户','钻石用户', 'zuanshi@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-23');
 INSERT INTO DH_USER VALUES ('1098', '2', '3', '长江大数据交易所','长江大数据交易所', 'houhai@cjbigdata.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-23');
-INSERT INTO DH_USER VALUES ('2001', '2', '3', '武源文','武源文', 'wuyw@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2016-01-05');
-INSERT INTO DH_USER VALUES ('2002', '2', '3', '张矩','张矩', 'zhangju@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2016-01-05');
-INSERT INTO DH_USER VALUES ('2003', '2', '3', '吴琼','吴琼', 'wuqiong@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2016-01-05');
-INSERT INTO DH_USER VALUES ('2004', '2', '3', '张鼐','张鼐', 'zhangnai@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2016-01-05');
-INSERT INTO DH_USER VALUES ('2005', '2', '3', '李靖','李靖', 'lijing9@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2016-01-05');
-INSERT INTO DH_USER VALUES ('2006', '2', '3', '王娜','王娜', 'wangna7@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2016-01-05');
-INSERT INTO DH_USER VALUES ('2007', '2', '3', '金进','金进', 'jinjin@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2016-01-05');
+INSERT INTO DH_USER VALUES ('2001', '2', '3', '武源文','武源文', 'wuyw@asiainfo.com','5010103dce075ee54b82f88562bd0e0f', '','2016-01-05',null);
+INSERT INTO DH_USER VALUES ('2002', '2', '3', '张矩','张矩', 'zhangju@asiainfo.com','78360c9a816e361b1cab97c36fed62f6', '','2016-01-05',null);
+INSERT INTO DH_USER VALUES ('2003', '2', '3', '吴琼','吴琼', 'wuqiong@asiainfo.com','abbb624408b166347576aa8108b188bb', '','2016-01-05',null);
+INSERT INTO DH_USER VALUES ('2004', '2', '3', '张鼐','张鼐', 'zhangnai@asiainfo.com','7e95b56bc3e9b48278667111fe1e7bfb', '','2016-01-05',null);
+INSERT INTO DH_USER VALUES ('2005', '2', '3', '李靖','李靖', 'lijing9@asiainfo.com','9c1a242e74a2778eef10f6d571fc176f', '','2016-01-05',null);
+INSERT INTO DH_USER VALUES ('2006', '2', '3', '王娜','王娜', 'wangna7@asiainfo.com','c7c6ec71b6d996456b24d2c131be3276', '','2016-01-05',null);
+INSERT INTO DH_USER VALUES ('2007', '2', '3', '金进','金进', 'jinjin@asiainfo.com','e0bb7114f61a773e1389610f1f8c88f5', '','2016-01-05',null);
+INSERT INTO DH_USER VALUES ('2008', '2', '3', '敬晓洋','敬晓阳', 'jingxy3@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-05',null);
+
+INSERT INTO DH_USER VALUES ('2009', '2', '3', '曹晓华','曹晓华', 'caoxh@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2010', '2', '3', '许颖','许颖', 'xuying@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2011', '2', '3', '杨映南','杨映南', 'yangyn@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2012', '2', '3', '阮友森','阮友森', 'ruanys@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2013', '2', '3', '高伟','高伟', 'gaowei@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2014', '2', '3', '张科勃','张科勃', 'zhangkb@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2015', '2', '3', '周镶玉','周镶玉', 'zhouxy@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2016', '2', '3', '陈峰风','陈峰风', 'chenff@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2017', '2', '3', '戴闵华','戴闵华', 'daimh@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2018', '2', '3', '王二虎','王二虎', 'wangeh@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2019', '2', '3', '杨菀霜','杨菀霜', 'yangws@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2020', '2', '3', '沙云飞','沙云飞', 'shayf@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2021', '2', '3', '陶旭进','陶旭进', 'taoxj@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2022', '2', '3', '张宇闻','张宇闻', 'zhangyuwen@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2023', '2', '3', '李捷','李捷', 'lij@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2024', '2', '3', '邹明达','邹明达', 'zoumd@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2025', '2', '3', '王迪','王迪', 'wangdi@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2026', '2', '3', '彭怀湘','彭怀湘', 'penghx2@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2027', '2', '3', '李正才','李正才', 'lizc5@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2028', '2', '3', '中国人民银行','中国人民银行', 'bankofchina@asiainfo.com','253fb71fcf825be7e16e23920f07488b', '中国人民银行简称央行，是中华人民共和国的中央银行，中华人民共和国国务院组成部门。在国务院领导下，制定和执行货币政策，防范和化解金融风险，维护金融稳定。','2016-01-11',null);
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2059', 2, 3, '中国社会科学院金融研究所','中国社会科学院金融研究所', 'financial@asiainfo.com','4c218e72438b748df67db4c10db79365', '中国社会科学院金融研究所是中国社会科学院专门从事金融研究的科研机构。致力于全面、系统研究国内外的金融理论、金融政策、金融法规、金融监管、金融市场、金融机构、金融产品和金融服务。','2016-01-18');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2060', 2, 3, '郭承峰','郭承峰', 'guocf5@asiainfo.com','902eb2f64e4bdb3bda2363f7ddbf5285', '','2016-01-21');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2061', 2, 3, '李俊义','李俊义', 'lijy15@asiainfo.com','a7189192ddacea959df98f680f379ea8', '','2016-01-21');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2062', 2, 3, '李国欢','李国欢', 'ligh3@asiainfo.com','297072e54d7843da5367831dc97fdf49', '','2016-01-21');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2063', 2, 3, '陈蕾','陈蕾', 'chenlei6@asiainfo.com','592c2970cc46005870bd14db4c539c05', '','2016-01-26');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2064', 2, 3, '钱建丰','钱建丰', 'qianjf@asiainfo.com','563b3466e858bd9dba26a9e82c629941', '','2016-01-28');
+update `DH_USER` set USER_STATUS=7 where USER_ID=1020;
+
+
 
 
 INSERT INTO DH_REPOSITORY VALUES ('10', '位置信息大全', '1002', '2', '1', '','1','1','3','0','5',NULL);
