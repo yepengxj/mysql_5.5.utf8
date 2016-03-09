@@ -510,7 +510,7 @@ INSERT INTO DH_USER VALUES ('1019', '2', '1',  '袁伟明','袁伟明', 'yuanwm@
 INSERT INTO DH_USER VALUES ('1020', '2', '1', '张维意','张维意', 'zhangwy@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
 INSERT INTO DH_USER VALUES ('1021', '2', '1', '程康健','程康健', 'chengkj@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-12');
 INSERT INTO DH_USER VALUES ('1022', '2', '2',  'admin','admin', 'datahub@asiainfo.com', '46c5fc8491b9632401a207c7ab04eb0a', '','2015-11-12');
-INSERT INTO DH_USER VALUES ('1023', '2', '1', '重庆市数易安信息技术有限公司','数易安', '13808305511@139.com', 'bde202e8ab686fec2a848e15b61744cb', '数易安公司成立于2015年，主要从事数据分析和数据产品服务。','2015-11-12');
+INSERT INTO DH_USER VALUES ('1023', '2', '1', '数易安信息技术有限公司','数易安', 'shuya@asiainfo.com', 'bde202e8ab686fec2a848e15b61744cb', '数易安公司成立于2015年，主要从事数据分析和数据产品服务。','2015-11-12');
 INSERT INTO DH_USER VALUES ('1024', '2', '1', '亚信','亚信', 'yaxin@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '亚信是中国最大、全球领先的通信行业IT解决方案和服务提供商,致力于成为“产业互联网时代的领航者”,为实现让中国软件影响世界的目标而不断进取。','2015-11-18');
 INSERT INTO DH_USER VALUES ('1025', '2', '1', '华院数据技术（上海）有限公司','华院数据', 'huaysj@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '华院数据技术（上海）有限公司（以下简称“华院数据”—于2012年8月由华院分析和德盈数据合并），成立于2002年3月，是国内为数很少的以高水平的数据挖掘和数据分析为核心能力的专业服务公司。','2015-11-18');
 INSERT INTO DH_USER VALUES ('1026', '2', '1', '杭州亚信中亿科技有限公司','中亿', 'zhongyi@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '杭州亚信中亿科技有限公司（以下简称中亿）隶属亚信集团，秉承亚信22年专业服务精神，专业为广大客户提供征信服务。拥有优质的数据合作源，能提供多维度征信服务。','2015-11-19');
@@ -529,6 +529,112 @@ INSERT INTO DH_USER VALUES ('1038', '2', '1', '党莎','党莎', 'dangsha@asiain
 INSERT INTO DH_USER VALUES ('1039', '2', '1', '王旭宁','王旭宁', 'wangxn5@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-28');
 INSERT INTO DH_USER VALUES ('1040', '2', '1', '汪宇虹','汪宇虹', 'wangyh10@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-28');
 INSERT INTO DH_USER VALUES ('1041', '2', '1', '刘亮亮','刘亮亮', 'liull7@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-28');
+INSERT INTO DH_USER VALUES ('1042', '2', '1', '中国环境监测总站','中国环境监测总站', 'cnemc@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '中国环境监测总站成立于1980年，是国家环境保护部直属事业单位。二十多年来，中国环境监测总站依靠高素质的科技队伍，凭藉优良的仪器设备，运用先进的科研手段，实行严格的科学管理，及时准确地收集和汇总全国环境监测数据，综合分析评价全国环境质量状况，不断开展环境监测科学研究，开发推广环境监测新技术和新方法。作为环境监测系统的技术排头兵，总站还负责拟定全国环境监测技术标准，负责全国环境监测系统的质量保证和质量控制，对全国环境监测网络进行技术指导和技术协调。','2015-11-30');
+INSERT INTO DH_USER VALUES ('1043', '2', '1', '中国气象科学数据共享服务网','中国气象科学数据共享服务网', 'metdata@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '中国气象科学数据共享服务网是提供气象资料共享的公益性网站，由一个主节点和分布在国家级和省级气象部门的若干个分节点网站组成。国家气象信息中心负责对中国气象科学数据共享服务网的建设和管理。','2015-11-30');
+INSERT INTO DH_USER VALUES ('1044', '2', '1', '中国交通通信信息网','中国交通通信信息网', 'icttic@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '中国交通通信信息网是由中国交通通信信息中心主办，面向交通行业用户和社会公众提供中国交通运输信息、数据和相关服务的门户网站。自创办起，专注于中国交通运输数据应用服务、交通运输信息服务、交通通信技术服务、交通行业企业服务。信息承载涵盖道路运输、水路运输、铁路运输、航空运输以及多式联运等综合交通运输领域，是国内交通运输通信、信息领域唯一综合门户站点。','2015-11-30');
+INSERT INTO DH_USER VALUES ('1045', '2', '1', '陈一庚','陈一庚', 'chenyg@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-11-30');
+INSERT INTO DH_USER VALUES ('1046', '2', '1', '北京博晓通科技有限公司','北京博晓通科技有限公司', 'inter3i@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '北京博晓通科技有限公司是网络大数据解决方案和咨询服务提供商，帮助用户低成本、高效地建立数据资产，并实现其中的价值。在机器数据、业务数据和网络数据，这三大主流数据的聚合和分析领域，博晓通主攻互联网数据聚合和分析服务，利用先进的大数据支撑技术和丰富的业务模型，以SaaS服务的方式满足企业对互联网社交媒体和电商平台的数据分析需求。','2015-11-30');
+INSERT INTO DH_USER VALUES ('1047', '2', '1', '车来了','车来了', 'chelaile@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '“车来了”是由元光科技开发的一款查询公交车实时位置的手机软件。不仅能提供公交车的到站距离、预计到站时间，还能显示整条公交线路的通行状况，让用户不再盲目等待，有效缓解用户候车的不安全感，同时改变用户出行方式。已上线北京、深圳、天津、杭州、成都、重庆等32个城市，日活跃用户突破150万，覆盖公交车辆100万辆，每日实时处理20亿条公交车定位数据，日用户查询请求2000万次。','2015-11-30');
+INSERT INTO DH_USER VALUES ('1048', '2', '1', '北京维艾思气象信息科技有限公司','北京维艾思气象信息科技有限公司', 'wis@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '北京维艾思气象信息科技有限公司(简称WIS)，成立于2000年6月。是国家气象中心（中央气象台）对外进行商业气象服务与合作的唯一窗口企业。具有中关村高新技术企业资质和软件企业认定证书，业务涉及：气象产品研发、应用气象服务系统研究、气象咨询服务、网站运营和信息集成等领域，并拥有国家信息产业部全网移动增值业务资质。','2015-11-30');
+INSERT INTO DH_USER VALUES ('1049', '2', '1', '北京海鑫科金高科技股份有限公司','北京海鑫科金高科技股份有限公司', 'hisign@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '北京海鑫科金高科技股份有限公司（简称海鑫科金）成立于1998年，一直专注于多生物识别技术与公安信息化建设与应用，以生物特征识别技术为核心，以公共安全领域为主要应用方向，销售自主研发的软硬件产品、软件定制开发、信息系统集成以及信息系统运维管理服务等。','2015-11-30');
+INSERT INTO DH_USER VALUES ('1050', '2', '1', '龙信数据（北京）有限公司','龙信数据（北京）有限公司', 'longcredit@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '龙信数据（北京）有限公司简称龙信数据，是中国数据智库的倡导者和践行者，专于大数据挖掘分析，以DaaS（数据即服务）为服务模式，提供集硬件、软件、数据集成、平台建设以及数据分析、研究、咨询等数据管理解决方案。','2015-11-30');
+INSERT INTO DH_USER VALUES ('1051', '2', '1', '星图科技','星图科技', 'syntun@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '星图科技是一家新锐的互联网大数据服务公司。Syntun US Office（California）成立于2010年，并在洛杉矶设立了其大数据科技应用中心-BDTAC。从事大数据技术的研究与行业数据应用开发工作，范围涉及线上零售、线上娱乐、线上教育等领域。','2015-11-30');
+INSERT INTO DH_USER VALUES ('1052', '2', '1', '北京中交汇能信息科技有限公司','北京中交汇能信息科技有限公司', 'bjzjkj@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '北京中交汇能信息科技有限公司（简称中交汇能）立足于互联网+交通，依托20多年丰富的交通行业经验，深度挖掘行业需求，推出汇盒系列智能硬件产品，以WIFI+GPS为核心，构建了客车、货车、轿车全覆盖的公路出行生态圈，面向乘客、司机提供一体化出行服务。 中交汇能的目标是打造人、车、路三位一体的出行服务平台，未来中交汇能将覆盖更多的交通工具，打造年覆盖200亿人次客运出行的移动互联网入口，并依托于平台，为企业和司机提供导航、可视化路况、定向物流等专向服务，也为移动互联网用户提供娱乐、巴士票务、购物、O2O、移动支付等个性化服务。','2015-11-30');
+INSERT INTO DH_USER VALUES ('1053', '2', '1', '个推','个推', 'getui@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '个推是国内最专业的第三方消息推送技术服务商，提供安卓推送（Android）及iOS推送SDK，使APP快速集成云推送功能，免去开发成本，有效提高产品活跃度与用户体验。个推还提供智能推送服务(Smart Push)，通过属性分析与推送测试的功能，帮助找到APP用户中最精准的人群，摒弃盲目推送技术，从而进行精细化运营[1]  。个推系统在低成本下，能够保证APP消息推送的时效性、有效性、稳定性，并且为用户省电省流量。个推为企业提供企业级的解决方案，帮助应用开发商快捷、高效的建立自己的推送服务系统，从而专注业务，快速融入市场。','2015-11-30');
+INSERT INTO DH_USER VALUES ('1054', '2', '1', '北京中交慧联信息科技有限公司','北京中交慧联信息科技有限公司', 'transilink@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '北京中交慧联信息科技有限公司，多年专注于两客市场，以营运车辆监控管理和运营服务为基础，开展综合交通信息服务。中交慧联凭借车联网领域的专业水平和成熟技术，先后获得高新技术企业、中国卫星导航产业十佳运营商、年度最佳车联网运营商等荣誉，成为国内商用车车联网行业的领军企业。','2015-11-30');
+INSERT INTO DH_USER VALUES ('1055', '2', '1', '数据堂','数据堂', 'datatang@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '数据堂是国内首家专注于互联网综合数据交易和服务的公司，致力于融合和盘活各类大数据资源，实现数据价值最大化，推动相关技术、应用和产业的创新。数据堂为中国大数据交易和服务领域的领头羊，数据堂已经在全国中小企业股份转让系统（新三板）挂牌上市，成功登陆资本市场，成为中国大数据交易及服务行业第一家挂牌新三板的企业。数据定制、数据商城、移动应用数据服务是数据堂旗下三大核心业务。','2015-11-30');
+INSERT INTO DH_USER VALUES ('1056', '2', '1', '贵士移动','贵士移动', 'questmobile@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '2014年组建的Quest Mobile（贵士移动），是行业内首家自成立时就专注于移动互联网研究的数据服务公司，以"回归数据统计真实本质，为精准决策插上腾飞翅膀"为目标，揭开数据迷雾、探索行业真相。凭借全球领先的数据拾取技术、大数据处理能力，以及强大的合作伙伴、渠道，Quest Mobile可以为全球致力于关注移动互联网的众多企业提供全方位的移动互联网综合数据服务和大数据解决方案。','2015-11-30');
+INSERT INTO DH_USER VALUES ('1057', '2', '1', '云相科技（北京）有限公司','云相科技（北京）有限公司', 'weidata@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '云相科技（北京）有限公司（简称：云相科技）是专业的社会化媒体大数据监测与咨询服务商。 公司总部设在北京，依托新浪地方频道在全国设有26个办事处。云相科技专注于社会化媒体大数据的分析、挖掘、预测及可视化，帮助政府、企业利用大数据进行服务创新。','2015-11-30');
+INSERT INTO DH_USER VALUES ('1058', '2', '1', '缔元信·网络数据','缔元信·网络数据', 'dratio@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '缔元信·网络数据是中国领先的第三方互联网数据服务提供商，是行业中唯一一家国家级高新技术企业。凭借自有的超大型网络数据服务管理平台（DDMP），缔元信以独有的全景数据服务模式，在网站运营效果、网络媒体价值评估、网络广告营销效果、网络公关舆情、电子商务等多方面为各类网站、品牌企业、公关及广告代理公司、政府部门等提供翔实专业的数据监测、分析及咨询服务。','2015-11-30');
+INSERT INTO DH_USER VALUES ('1059', '2', '1', '北京中传瑞智市场调查有限公司','北京中传瑞智市场调查有限公司', 'cucrz@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '北京中传瑞智市场调查有限公司（中传瑞智CUC-RZ RESEARCH）成立于2008年，是由中国传媒大学与中辉世纪传媒集团联合发起并成立、学校唯一授权的、专业从事媒体数据采集、数据分析、运营决策支持的全内资公司，总部位于北京市丰台科技园区金融港，数据实验室位于中国传媒大学国际交流中心。','2015-11-30');
+INSERT INTO DH_USER VALUES ('1060', '2', '1', '公开竞赛数据','公开竞赛数据', 'pcd@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '上海SODA、广州公共交通、中国好创意等大数据竞赛数据。 ','2015-11-30');
+
+
+
+
+INSERT INTO DH_USER VALUES ('1071', '2', '1', '伍平','伍平', 'wuping3@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1072', '2', '1',  '郑明清', '郑明清', 'zhengmq@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1073', '2', '1', '张云翔','张云翔', 'zhangyx5@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1074', '2', '1',  '李明','李明', 'liming3@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1075', '2', '1', '华超杰','华超杰', 'huacj@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1076', '2', '1',  '张曼','张曼', 'zhangman3@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1077', '2', '1',  '华翔','华翔', 'huaxiang@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1078', '2', '1', '孙东远','孙东远', 'sundy@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1079', '2', '1',  '黄平','黄平', 'huangping@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1080', '2', '1', '罗伟','罗伟', 'luowei5@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1081', '2', '1',  '王力','王力', 'wangli20@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1082', '2', '1', '魏立夏','魏立夏', 'weilx@asialantao.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1083', '2', '1', '李铮','李铮', 'lizheng3@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1084', '2', '1',  '游泳','游泳', 'youyong@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1085', '2', '1',  '韦正云','韦正云', 'weizy@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1086', '2', '1', '刘仁杰','刘仁杰', 'liurj@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1087', '2', '1',  '唐炜','唐炜', 'tangwei@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1088', '2', '1',  '牛琳','牛琳', 'niulin@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1089', '2', '1',  '王珏华','王珏华', 'wangjh11@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1090', '2', '1', '金进','金进', 'jinjin@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-02');
+INSERT INTO DH_USER VALUES ('1091', '2', '1', '刘泉','刘泉', 'liuquan2@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-03');
+INSERT INTO DH_USER VALUES ('1092', '2', '3', '无锡市政府数据服务网','无锡市政府数据服务网', 'datawuxi@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '无锡市政府数据服务网是无锡市政务部门数据公开的门户，为企业和个人开展政务信息资源的社会化开发利用提供数据支撑，推动信息资源增值服务业的发展以及相关数据分析与研究工作的开展。包括教育、公安、民政、人社、国土、建设、规划局等15个部门的100个数据包，涵盖了住房保障、婚姻登记、旅游名录、计划生育、土地出让、建设规划、用水用气、社会保障、文教事业等各类信息；同时还提供了无锡天地图链接以及26个手机APP应用软件供下载。','2015-12-15');
+
+INSERT INTO DH_USER VALUES ('1093', '2', '3', '湛江市政府数据服务网','湛江市政府数据服务网', 'datazj@asiainfo.com', '8ddcff3a80f4189ca1c9d4d902c3c909', '湛江市政府数据服务网于2012年12月对社会公开，目标是促进政府信息资源的开发利用，发挥政府信息资源在本市经济结构转型、现代服务业加快发展中的重要作用，满足公众和企业对政府信息的“知情权”和“使用权”，向社会提供政府信息资源和公共社会资源的浏览、查询、下载等基本数据服务，同时汇聚发布基于政府信息资源开发的应用程序等增值服务。 ','2015-12-22');
+INSERT INTO DH_USER VALUES ('1094', '2', '3', '薛雅升','薛雅升', 'xueyasheng1215@icloud.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-22');
+INSERT INTO DH_USER VALUES ('1095', '2', '1', '注册用户','注册用户', 'zhucce@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-23');
+INSERT INTO DH_USER VALUES ('1096', '2', '4', '金卡用户','金卡用户', 'jinka@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-23');
+INSERT INTO DH_USER VALUES ('1097', '2', '5', '钻石用户','钻石用户', 'zuanshi@asiainfo.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-23');
+INSERT INTO DH_USER VALUES ('1098', '2', '3', '长江大数据交易所','长江大数据交易所', 'houhai@cjbigdata.com','8ddcff3a80f4189ca1c9d4d902c3c909', '','2015-12-23');
+INSERT INTO DH_USER VALUES ('2001', '2', '3', '武源文','武源文', 'wuyw@asiainfo.com','5010103dce075ee54b82f88562bd0e0f', '','2016-01-05',null);
+INSERT INTO DH_USER VALUES ('2002', '2', '3', '张矩','张矩', 'zhangju@asiainfo.com','78360c9a816e361b1cab97c36fed62f6', '','2016-01-05',null);
+INSERT INTO DH_USER VALUES ('2003', '2', '3', '吴琼','吴琼', 'wuqiong@asiainfo.com','abbb624408b166347576aa8108b188bb', '','2016-01-05',null);
+INSERT INTO DH_USER VALUES ('2004', '2', '3', '张鼐','张鼐', 'zhangnai@asiainfo.com','7e95b56bc3e9b48278667111fe1e7bfb', '','2016-01-05',null);
+INSERT INTO DH_USER VALUES ('2005', '2', '3', '李靖','李靖', 'lijing9@asiainfo.com','9c1a242e74a2778eef10f6d571fc176f', '','2016-01-05',null);
+INSERT INTO DH_USER VALUES ('2006', '2', '3', '王娜','王娜', 'wangna7@asiainfo.com','c7c6ec71b6d996456b24d2c131be3276', '','2016-01-05',null);
+INSERT INTO DH_USER VALUES ('2007', '2', '3', '金进','金进', 'jinjin@asiainfo.com','e0bb7114f61a773e1389610f1f8c88f5', '','2016-01-05',null);
+INSERT INTO DH_USER VALUES ('2008', '2', '3', '敬晓洋','敬晓阳', 'jingxy3@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-05',null);
+
+INSERT INTO DH_USER VALUES ('2009', '2', '3', '曹晓华','曹晓华', 'caoxh@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2010', '2', '3', '许颖','许颖', 'xuying@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2011', '2', '3', '杨映南','杨映南', 'yangyn@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2012', '2', '3', '阮友森','阮友森', 'ruanys@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2013', '2', '3', '高伟','高伟', 'gaowei@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2014', '2', '3', '张科勃','张科勃', 'zhangkb@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2015', '2', '3', '周镶玉','周镶玉', 'zhouxy@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2016', '2', '3', '陈峰风','陈峰风', 'chenff@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2017', '2', '3', '戴闵华','戴闵华', 'daimh@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2018', '2', '3', '王二虎','王二虎', 'wangeh@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2019', '2', '3', '杨菀霜','杨菀霜', 'yangws@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2020', '2', '3', '沙云飞','沙云飞', 'shayf@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2021', '2', '3', '陶旭进','陶旭进', 'taoxj@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2022', '2', '3', '张宇闻','张宇闻', 'zhangyuwen@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2023', '2', '3', '李捷','李捷', 'lij@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2024', '2', '3', '邹明达','邹明达', 'zoumd@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2025', '2', '3', '王迪','王迪', 'wangdi@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2026', '2', '3', '彭怀湘','彭怀湘', 'penghx2@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2027', '2', '3', '李正才','李正才', 'lizc5@asiainfo.com','496e6bb48ae0ba9f756c6f18d7218895', '','2016-01-08',null);
+INSERT INTO DH_USER VALUES ('2028', '2', '3', '中国人民银行','中国人民银行', 'bankofchina@asiainfo.com','253fb71fcf825be7e16e23920f07488b', '中国人民银行简称央行，是中华人民共和国的中央银行，中华人民共和国国务院组成部门。在国务院领导下，制定和执行货币政策，防范和化解金融风险，维护金融稳定。','2016-01-11',null);
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2059', 2, 3, '中国社会科学院金融研究所','中国社会科学院金融研究所', 'financial@asiainfo.com','4c218e72438b748df67db4c10db79365', '中国社会科学院金融研究所是中国社会科学院专门从事金融研究的科研机构。致力于全面、系统研究国内外的金融理论、金融政策、金融法规、金融监管、金融市场、金融机构、金融产品和金融服务。','2016-01-18');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2060', 2, 3, '郭承峰','郭承峰', 'guocf5@asiainfo.com','902eb2f64e4bdb3bda2363f7ddbf5285', '','2016-01-21');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2061', 2, 3, '李俊义','李俊义', 'lijy15@asiainfo.com','a7189192ddacea959df98f680f379ea8', '','2016-01-21');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2062', 2, 3, '李国欢','李国欢', 'ligh3@asiainfo.com','297072e54d7843da5367831dc97fdf49', '','2016-01-21');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2063', 2, 3, '陈蕾','陈蕾', 'chenlei6@asiainfo.com','592c2970cc46005870bd14db4c539c05', '','2016-01-26');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2064', 2, 3, '钱建丰','钱建丰', 'qianjf@asiainfo.com','563b3466e858bd9dba26a9e82c629941', '','2016-01-28');
+update `DH_USER` set USER_STATUS=7 where USER_ID=1020;
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2065', 2, 3, '李小伟','李小伟', 'lixw@maitewang.com','563b3466e858bd9dba26a9e82c629941', '','2016-02-01');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2066', 2, 3, '宋哲鑫','宋哲鑫', 'songzx@maitewang.com','563b3466e858bd9dba26a9e82c629941', '','2016-02-01');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2067', 2, 3, '张宇','张宇', 'zhangyu@inter3i.com','563b3466e858bd9dba26a9e82c629941', '博晓通','2016-02-01');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2068', 2, 3, '张林','张林', 'zhangl@mapuni.com','563b3466e858bd9dba26a9e82c629941', '中科宇图','2016-02-01');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2069', 2, 3, '黄萌','黄萌', 'melvin@syntun.com','563b3466e858bd9dba26a9e82c629941', '星图科技','2016-02-01');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2070', 2, 3, '张旭','张旭', 'zhangxu@mininglamp.com','563b3466e858bd9dba26a9e82c629941', '明略软件','2016-02-01');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2071', 2, 3, '那云鹏','那云鹏', 'yunpeng.na@bluefocus.com','563b3466e858bd9dba26a9e82c629941', '蓝标集团','2016-02-01');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2072', 2, 3, '朱少松','朱少松', 'zhushaosong@4paradigm.com','563b3466e858bd9dba26a9e82c629941', '第四范式','2016-02-01');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2073', 2, 3, '刘秋雯','刘秋雯', 'liuqiuwen@hiynn.com','563b3466e858bd9dba26a9e82c629941', '海云数据','2016-02-01');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2074', 2, 3, '陈薪','陈薪', 'chenxin@acmr.com.cn ','563b3466e858bd9dba26a9e82c629941', '华通人商用信息','2016-02-01');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2075', 2, 3, '郑洪','郑洪', 'hong.zheng@kuaiyou.com','563b3466e858bd9dba26a9e82c629941', 'ADVIEW','2016-02-01');
+INSERT INTO DH_USER (USER_ID,USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES ('2076', 2, 3, '孙伟','孙伟', 'wei.sun@baifendian.com','563b3466e858bd9dba26a9e82c629941', '百分点','2016-02-01');
+INSERT INTO DH_USER (USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES (2, 3, '林佳婕','林佳婕', 'linjiajie@geotmt.com','1e60f4bc8370f1cd932972e3d2fbef94', '集奥聚合','2016-02-03');
+INSERT INTO DH_USER (USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES (2, 3, '丁正洪','丁正洪', 'dingzhenghong@weidata.cn','c96bc8b98009485354a633bea16469e1', '云相科技','2016-02-03');
+INSERT INTO DH_USER (USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES (2, 3, '南海政府服务网','南海政府服务网', 'nanhaizf@asiainfo.com','f05ad7d93dce64f20ae4979d82c92402', '南海政府服务网主要提供数据查询、数据下载、政务APP应用下载、地图应用等功能。数据涉及了表格、文本、图片、地图、多媒体等各类实时与非实时的政府可公开数据，所提供的公开数据可供认证用户下载。','2016-03-02');
+INSERT INTO DH_USER (USER_STATUS,USER_TYPE,USER_NAME,NICK_NAME,LOGIN_NAME,LOGIN_PASSWD,SUMMARY,OP_TIME) VALUES (2, 3, '潘文娟','潘文娟','panwj3@asiainfo.com','3c501f1107f410c3f03930f76eade5fd','亚信','2016-03-02');
+
+
 
 
 INSERT INTO DH_REPOSITORY VALUES ('10', '位置信息大全', '1002', '2', '1', '','1','1','3','0','5',NULL);
@@ -626,6 +732,9 @@ INSERT INTO DH_QUOTA VALUES ('3', '100', '500', '10000', '20', '4096');
 INSERT INTO DH_QUOTAREMAIN VALUES ('1002', '4', '24', '100', '0', '100');
 INSERT INTO DH_QUOTAREMAIN VALUES ('1004', '4', '24', '100', '0', '100');
 COMMIT;
+
+
+
 
 
 ## DH_USER，DH_REPOSITORY 设置主键、自增
